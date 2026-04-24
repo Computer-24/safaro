@@ -1,0 +1,25 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: safaro_postgres
+    restart: always
+
+    # Environment variables used by PostgreSQL
+    environment:
+      POSTGRES_USER: safety
+      POSTGRES_PASSWORD: safety123
+      POSTGRES_DB: safetydb
+
+    # Expose Postgres to your host machine on port 5432
+    ports:
+      - "5432:5432"
+
+    # Mount a named volume to persist database data
+    # This ensures your users, tickets, and all DB content survive restarts
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+# Declare the named volume used above
+# This is required so Docker knows the volume exists and persists it
+volumes:
+  postgres_data:
