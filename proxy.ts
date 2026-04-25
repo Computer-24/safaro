@@ -6,24 +6,48 @@ import { getToken } from "next-auth/jwt";
 export async function proxy(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
-  // Allow NextAuth API routes to pass through
+  // Allow NextAuth API routes
   if (path.startsWith("/api/auth")) {
     return NextResponse.next();
   }
 
-  // Allow static assets and _next
-  if (path.startsWith("/_next") || path.startsWith("/favicon.ico") || path.startsWith("/vercel.svg")) {
+  // Allow static assets
+  if (
+    path.startsWith("/_next") ||
+    path.startsWith("/favicon.ico") ||
+    path.startsWith("/vercel.svg") ||
+    path.startsWith("/public")
+  ) {
     return NextResponse.next();
   }
 
-  // Protect specific app routes
-  const protectedRoutes = ["/dashboard", "/tickets", "/admin"];
-  const isProtected = protectedRoutes.some((route) => path.startsWith(route));
+  // Public routes
+  const publicRoutes = ["/login"];
+  if (publicRoutes.includes(path)) {
+    return NextResponse.next();
+  }
 
-  if (isProtected) {
-    const token = await getToken({ req: request });
-    if (!token) {
-      return NextResponse.redirect(new URL("/login", request.url));
+  // Protected routes
+  const token = await getToken({ req: request });
+
+  if (!token) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
+  // Role-based protection
+  const role = token.role as string;
+
+  // ADMIN-only routes
+  if (path.startsWith("/admin") || path.startsWith("/tickets/all")) {
+    if (role !== "ADMIN") {
+      return NextResponse.redirect(new URL("/dashboard", request.url));
+    }
+  }
+
+  // APPROVER-only routes
+  if (path.startsWith("/tickets/assigned") || path.startsWith("/lessons")) {
+    if (role !== "APPROVER" && role !== "ADMIN") {
+      return NextResponse.redirect(new URL("/dashboard", request.url));
     }
   }
 
@@ -31,5 +55,9 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/tickets/:path*", "/admin/:path*"],
+  matcher: [
+    "/dashboard/:path*",
+    "/tickets/:path*",
+    "/admin/:path*",
+  ],
 };

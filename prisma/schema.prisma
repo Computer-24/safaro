@@ -12,14 +12,30 @@ model User {
   name       String
   email      String   @unique
   password   String
+
   companyId  String
-  createdAt  DateTime @default(now())
+  company    Company  @relation(fields: [companyId], references: [id])
+
   approverId String?
+  approver   User?    @relation("ApproverRelation", fields: [approverId], references: [id])
+  delegates  User[]   @relation("ApproverRelation")
+
   role       Role     @default(USER)
+  createdAt  DateTime @default(now())
 }
+
+
 
 enum Role {
   USER
   APPROVER
   ADMIN
 }
+
+model Company {
+  id        String  @id @default(cuid())
+  name      String  @unique
+  users     User[]
+  createdAt DateTime @default(now())
+}
+
