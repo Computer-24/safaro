@@ -46,13 +46,14 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background px-4 relative">
+    <div className="w-full">
+
       {/* Theme toggle */}
       <div className="absolute top-4 right-4">
         <ThemeToggle />
       </div>
 
-      <Card className="w-full max-w-md shadow-lg border border-border">
+      <Card className="w-full max-w-sm md:max-w-md lg:max-w-lg mx-auto shadow-lg border border-border">
         <CardHeader className="text-center space-y-1">
           <CardTitle className="text-2xl font-bold">Welcome to Safaro</CardTitle>
           <CardDescription>Sign in to continue</CardDescription>
@@ -98,6 +99,7 @@ export default function LoginPage() {
           </form>
         </CardContent>
       </Card>
+
     </div>
   );
 }

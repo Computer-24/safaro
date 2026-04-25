@@ -33,22 +33,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         inter.variable
       )}
     >
-      <body className="min-h-screen flex font-sans">
-        <ThemeProvider>
-          <TooltipProvider>
-
-            {/* Main content on the left */}
-            <main className="flex-1 p-6 pb-20 md:pb-6 overflow-x-auto">
-              {children}
-            </main>
-
-            {/* Sidebar on the right */}
-            <AppNav role={role} />
-
-            <Toaster />
-          </TooltipProvider>
-        </ThemeProvider>
-      </body>
+      <body className="min-h-screen font-sans">
+  <ThemeProvider>
+    <TooltipProvider>
+      {children}
+      <Toaster />
+    </TooltipProvider>
+  </ThemeProvider>
+</body>
     </html>
   )
 }

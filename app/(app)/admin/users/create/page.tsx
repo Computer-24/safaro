@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma"
-import { Role } from "@/app/generated/prisma/enums"
+import { Role } from "@/app/(app)/generated/prisma/enums"
 import CreateUserForm from "./form"
 
 export default async function CreateUserPage() {
