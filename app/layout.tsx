@@ -36,15 +36,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className="min-h-screen flex font-sans">
         <ThemeProvider>
           <TooltipProvider>
-            {/* Global Right-Side Sidebar */}
-            <AppNav role={role} />
 
-            {/* Main Content Area */}
-            <main className="flex-1 md:mr-64 p-6 pb-20 md:pb-6">
-              <div className="max-w-6xl mx-auto w-full">
-                {children}
-              </div>
+            {/* Main content on the left */}
+            <main className="flex-1 p-6 pb-20 md:pb-6 overflow-x-auto">
+              {children}
             </main>
+
+            {/* Sidebar on the right */}
+            <AppNav role={role} />
 
             <Toaster />
           </TooltipProvider>

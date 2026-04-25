@@ -59,7 +59,7 @@ export function AppNav({ role }: { role: string }) {
       {/* DESKTOP SIDEBAR (RIGHT SIDE) */}
       <aside
         className={cn(
-          "hidden md:flex flex-col border-l bg-card h-screen transition-all duration-300 fixed right-0 top-0",
+          "hidden md:flex flex-col border-l bg-card h-screen transition-all duration-300",
           collapsed ? "w-20" : "w-64"
         )}
       >

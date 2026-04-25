@@ -1,8 +1,9 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { prisma } from "@/lib/prisma"
+import { DataTable } from "@/components/data-table"
+import { userColumns, UserRow } from "./columns"
 
 export default async function UsersPage() {
   const users = await prisma.user.findMany({
@@ -13,9 +14,18 @@ export default async function UsersPage() {
     orderBy: { createdAt: "desc" },
   })
 
+  const rows: UserRow[] = users.map((u) => ({
+    id: u.id,
+    name: u.name,
+    email: u.email,
+    role: u.role,
+    companyName: u.company?.name ?? null,
+    approverName: u.approver?.name ?? null,
+    createdAt: u.createdAt.toISOString(),
+  }))
+
   return (
     <div className="space-y-6">
-      {/* Header Row */}
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold">Users</h1>
 
@@ -30,50 +40,7 @@ export default async function UsersPage() {
         </CardHeader>
 
         <CardContent>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b text-muted-foreground">
-                  <th className="py-2 text-left font-medium">Name</th>
-                  <th className="py-2 text-left font-medium">Email</th>
-                  <th className="py-2 text-left font-medium">Role</th>
-                  <th className="py-2 text-left font-medium">Company</th>
-                  <th className="py-2 text-left font-medium">Approver</th>
-                  <th className="py-2 text-left font-medium">Actions</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {users.map((user) => (
-                  <tr key={user.id} className="border-b">
-                    <td className="py-3">{user.name}</td>
-                    <td className="py-3">{user.email}</td>
-
-                    <td className="py-3">
-                      <Badge variant="outline">{user.role}</Badge>
-                    </td>
-
-                    <td className="py-3">
-                      {user.company?.name ?? "—"}
-                    </td>
-
-                    <td className="py-3">
-                      {user.approver?.name ?? "—"}
-                    </td>
-
-                    <td className="py-3">
-                      <Link
-                        href={`/admin/users/${user.id}`}
-                        className="text-primary hover:underline"
-                      >
-                        Edit →
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <DataTable columns={userColumns} data={rows} />
         </CardContent>
       </Card>
     </div>
