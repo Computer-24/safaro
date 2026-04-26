@@ -22,15 +22,23 @@ export default async function UsersPage() {
     companyName: u.company?.name ?? null,
     approverName: u.approver?.name ?? null,
     createdAt: u.createdAt.toISOString(),
+    isActive: u.isActive,
   }))
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">Users</h1>
-
+      <div className="flex items-start justify-end">
         <Link href="/admin/users/create">
-          <Button>Create User</Button>
+          <Button
+            className="h-10 min-h-10 text-base flex items-center gap-2
+                       bg-green-600 text-white border border-green-600
+                       hover:bg-green-700 hover:shadow-md hover:-translate-y-0.5
+                       transition transform duration-150 ease-in-out
+                       focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-green-300"
+            aria-label="Create User"
+          >
+            <span>Create User</span>
+          </Button>
         </Link>
       </div>
 

@@ -1,14 +1,19 @@
 "use client"
 
-import { useForm } from "react-hook-form"
+import { useForm, type Resolver } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 
-import { createUserSchema, CreateUserInput, RoleEnum } from "./schema"
-import { createUserAction } from "./actions"
+import { updateUserSchema, type UpdateUserInput } from "./updateUserSchema"
+import { updateUserAction } from "./updateUserAction"
 
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
@@ -20,58 +25,96 @@ import {
   SelectItem,
 } from "@/components/ui/select"
 
+import { RoleEnum } from "../create/schema"
+import { Role } from "@/app/(app)/generated/prisma/enums"
+
 type CompanyOption = { id: string; name: string }
 type ApproverOption = { id: string; name: string }
 
-export default function CreateUserForm({
-  companies,
-  approvers,
-}: {
+interface UpdateUserFormProps {
+  user: {
+    id: string
+    name: string
+    email: string
+    companyId: string
+    role: Role
+    approverId: string | null
+  }
   companies: CompanyOption[]
   approvers: ApproverOption[]
-}) {
+}
+
+export default function UpdateUserForm({
+  user,
+  companies,
+  approvers,
+}: UpdateUserFormProps) {
   const router = useRouter()
 
-  const form = useForm<CreateUserInput>({
-    resolver: zodResolver(createUserSchema),
+  // typed resolver to avoid zod/preprocess inference mismatch
+  const resolver = zodResolver(updateUserSchema) as unknown as Resolver<
+    UpdateUserInput,
+    any
+  >
+
+  const form = useForm<UpdateUserInput>({
+    resolver,
     defaultValues: {
-      role: "USER",
-      approverId: null,
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      password: "",
+      companyId: user.companyId,
+      role: user.role,
+      approverId: user.approverId,
     },
   })
-
-  async function onSubmit(values: CreateUserInput) {
-    const result = await createUserAction(values)
-
-    if (result?.error) {
-      Object.entries(result.error).forEach(([field, messages]) => {
-        form.setError(field as any, { message: messages[0] })
-      })
-
-      toast.error("Could not create user", {
-        description: "Please fix the errors and try again",
-      })
-
-      return
-    }
-
-    toast.success("User created successfully", {
-      duration: 3000,
-    })
-
-    router.push("/admin/users")
-  }
 
   const fieldClass = "h-[44px] min-h-[44px] w-full"
   const buttonHeight = "h-[44px] min-h-[44px]"
   const errorText = "text-sm text-red-500"
+
+  async function onSubmit(values: UpdateUserInput) {
+    toast.dismiss()
+
+    try {
+      const result = await updateUserAction(values)
+
+      if (!result.success) {
+        const errorMap = result.error
+
+        if (typeof errorMap.subordinates === "number") {
+          toast.error(
+            `⛔ ${errorMap._global?.[0] ?? "Cannot change role"} (${errorMap.subordinates} subordinate(s) must be reassigned)`
+          )
+        } else if (Array.isArray(errorMap._global)) {
+          toast.error(`⚠️ ${errorMap._global[0]}`)
+        } else {
+          toast.error("⚠️ Could not update user")
+        }
+
+        Object.entries(errorMap).forEach(([field, messages]) => {
+          if (field === "_global" || field === "subordinates") return
+          form.setError(field as any, { message: messages[0] })
+        })
+
+        return
+      }
+
+      toast.success("🎉 User updated successfully")
+      router.push("/admin/users")
+    } catch (err) {
+      console.error(err)
+      toast.error("⚠️ Unexpected error while updating user")
+    }
+  }
 
   return (
     <div className="flex justify-center py-10">
       <Card className="w-full max-w-lg shadow-md pb-8">
         <CardHeader>
           <CardTitle className="text-center text-2xl font-semibold">
-            Create User
+            Edit User
           </CardTitle>
         </CardHeader>
 
@@ -81,11 +124,7 @@ export default function CreateUserForm({
             {/* NAME */}
             <div className="space-y-2">
               <Label>Name</Label>
-              <Input
-                {...form.register("name")}
-                placeholder="John Doe"
-                className={fieldClass}
-              />
+              <Input {...form.register("name")} className={fieldClass} />
               {form.formState.errors.name && (
                 <p className={errorText}>{form.formState.errors.name.message}</p>
               )}
@@ -94,11 +133,7 @@ export default function CreateUserForm({
             {/* EMAIL */}
             <div className="space-y-2">
               <Label>Email</Label>
-              <Input
-                {...form.register("email")}
-                placeholder="john@example.com"
-                className={fieldClass}
-              />
+              <Input {...form.register("email")} className={fieldClass} />
               {form.formState.errors.email && (
                 <p className={errorText}>{form.formState.errors.email.message}</p>
               )}
@@ -106,11 +141,10 @@ export default function CreateUserForm({
 
             {/* PASSWORD */}
             <div className="space-y-2">
-              <Label>Password</Label>
+              <Label>New Password (optional)</Label>
               <Input
                 type="password"
                 {...form.register("password")}
-                placeholder="******"
                 className={fieldClass}
               />
               {form.formState.errors.password && (
@@ -121,7 +155,10 @@ export default function CreateUserForm({
             {/* COMPANY */}
             <div className="space-y-2">
               <Label>Company</Label>
-              <Select onValueChange={(v) => form.setValue("companyId", v)}>
+              <Select
+                defaultValue={user.companyId}
+                onValueChange={(v) => form.setValue("companyId", v)}
+              >
                 <SelectTrigger className={fieldClass}>
                   <SelectValue placeholder="Select company" />
                 </SelectTrigger>
@@ -141,7 +178,10 @@ export default function CreateUserForm({
             {/* ROLE */}
             <div className="space-y-2">
               <Label>Role</Label>
-              <Select onValueChange={(v) => form.setValue("role", v as any)}>
+              <Select
+                defaultValue={String(user.role)}
+                onValueChange={(v) => form.setValue("role", v as any)}
+              >
                 <SelectTrigger className={fieldClass}>
                   <SelectValue placeholder="Select role" />
                 </SelectTrigger>
@@ -161,7 +201,10 @@ export default function CreateUserForm({
             {/* APPROVER */}
             <div className="space-y-2">
               <Label>Approver</Label>
-              <Select onValueChange={(v) => form.setValue("approverId", v)}>
+              <Select
+                defaultValue={user.approverId ?? undefined}
+                onValueChange={(v) => form.setValue("approverId", v)}
+              >
                 <SelectTrigger className={fieldClass}>
                   <SelectValue placeholder="Select approver" />
                 </SelectTrigger>
@@ -178,7 +221,7 @@ export default function CreateUserForm({
               )}
             </div>
 
-            {/* BUTTONS: side-by-side with emojis, Cancel in red */}
+            {/* BUTTONS: wrapper prevents space-y from interfering */}
             <div className="pt-2">
               <div className="flex items-center gap-3">
                 <Button
@@ -195,7 +238,7 @@ export default function CreateUserForm({
                   className={`flex-1 min-w-0 ${buttonHeight} text-base`}
                   disabled={form.formState.isSubmitting}
                 >
-                  {form.formState.isSubmitting ? "Creating..." : "🎉 Create User"}
+                  {form.formState.isSubmitting ? "Saving..." : "🎉 Save Changes"}
                 </Button>
               </div>
             </div>

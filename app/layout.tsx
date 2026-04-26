@@ -10,6 +10,7 @@ import { Toaster } from "@/components/ui/sonner"
 import { AppNav } from "@/components/app-nav"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { AlertTriangle, CheckCircle, XCircle } from "lucide-react"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -37,7 +38,17 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   <ThemeProvider>
     <TooltipProvider>
       {children}
-      <Toaster />
+      <Toaster
+      position="bottom-center"
+      toastOptions={{
+        duration: 4000,
+      }}
+      icons={{
+        success: <CheckCircle className="w-5 h-5 text-green-600" />,
+        error: <XCircle className="w-5 h-5 text-red-600" />,
+        warning: <AlertTriangle className="w-5 h-5 text-yellow-500" />,
+      }}
+    />
     </TooltipProvider>
   </ThemeProvider>
 </body>

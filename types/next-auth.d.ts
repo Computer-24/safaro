@@ -9,6 +9,7 @@ declare module "next-auth" {
   }
 
   interface Session {
+    error?: string; 
     user: {
       id: string;
       role: string;
@@ -24,5 +25,6 @@ declare module "next-auth/jwt" {
     role: string;
     companyId: string;
     approverId?: string | null;
+    error?: string; 
   }
 }

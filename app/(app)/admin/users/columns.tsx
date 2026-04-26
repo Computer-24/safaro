@@ -1,21 +1,26 @@
-"use client"
+"use client";
 
-import { ColumnDef } from "@tanstack/react-table"
-import { Badge } from "@/components/ui/badge"
-import Link from "next/link"
+import { ColumnDef } from "@tanstack/react-table";
+import { Badge } from "@/components/ui/badge";
+import { Switch } from "@/components/ui/switch";
+import { toast } from "sonner";
+import Link from "next/link";
+import { useState } from "react";
+import UserActiveSwitch from "./UserActiveSwitch";
 
 export type UserRow = {
-  id: string
-  name: string | null
-  email: string | null
-  role: string
-  companyName: string | null
-  approverName: string | null
-  createdAt: string
-}
+  id: string;
+  name: string | null;
+  email: string | null;
+  role: string;
+  companyName: string | null;
+  approverName: string | null;
+  createdAt: string;
+  isActive: boolean; // ⭐ required for toggle
+};
 
 function SortHeader({ column, label }: any) {
-  const sorted = column.getIsSorted()
+  const sorted = column.getIsSorted();
 
   return (
     <button
@@ -24,12 +29,11 @@ function SortHeader({ column, label }: any) {
     >
       {label}
 
-      {/* Sorting indicator */}
       {sorted === false && <span className="opacity-40">↕</span>}
       {sorted === "asc" && <span>↑</span>}
       {sorted === "desc" && <span>↓</span>}
     </button>
-  )
+  );
 }
 
 export const userColumns: ColumnDef<UserRow>[] = [
@@ -45,15 +49,15 @@ export const userColumns: ColumnDef<UserRow>[] = [
     accessorKey: "role",
     header: ({ column }) => <SortHeader column={column} label="Role" />,
     cell: ({ row }) => {
-      const role = row.getValue("role") as string
+      const role = row.getValue("role") as string;
       const color =
         role === "ADMIN"
           ? "bg-red-500 text-white"
           : role === "APPROVER"
-          ? "bg-blue-500 text-white"
-          : "bg-green-500 text-white"
+            ? "bg-blue-500 text-white"
+            : "bg-green-500 text-white";
 
-      return <Badge className={color}>{role}</Badge>
+      return <Badge className={color}>{role}</Badge>;
     },
   },
   {
@@ -68,10 +72,31 @@ export const userColumns: ColumnDef<UserRow>[] = [
     accessorKey: "createdAt",
     header: ({ column }) => <SortHeader column={column} label="Created" />,
     cell: ({ row }) => {
-      const date = new Date(row.getValue("createdAt"))
-      return date.toLocaleDateString()
+      const date = new Date(row.getValue("createdAt"));
+      return date.toLocaleDateString();
     },
   },
+{
+  id: "isActive",
+  accessorKey: "isActive",
+  header: ({ column }) => <SortHeader column={column} label="Active" />,
+  cell: ({ row }) => {
+    const user = row.original as { id: string; isActive: boolean; role?: string };
+
+    const isAdmin = user.role === "ADMIN";
+
+    return (
+      <div className="w-full flex items-center justify-center">
+          <UserActiveSwitch
+            id={user.id}
+            initial={user.isActive}
+            disabled={isAdmin}
+            disabledReason={isAdmin ? "Admins cannot be deactivated" : undefined}
+          />
+      </div>
+    );
+  },
+},
   {
     id: "actions",
     header: "Actions",
@@ -85,12 +110,11 @@ export const userColumns: ColumnDef<UserRow>[] = [
     ),
   },
 
-  // Global search column (hidden)
+  // Hidden global search column
   {
-  id: "search",
-  accessorFn: (row) =>
-    `${row.name} ${row.email} ${row.role} ${row.companyName} ${row.approverName}`,
-  enableHiding: true, // allow hiding
-}
-
-]
+    id: "search",
+    accessorFn: (row) =>
+      `${row.name} ${row.email} ${row.role} ${row.companyName} ${row.approverName}`,
+    enableHiding: true,
+  },
+];

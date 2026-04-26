@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 import {
   Card,
@@ -19,12 +20,10 @@ import { ThemeToggle } from "@/components/theme-toggle";
 export default function LoginPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
-    setError("");
 
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
@@ -36,13 +35,28 @@ export default function LoginPage() {
       redirect: false,
     });
 
-    if (res?.error) {
-      setError("Invalid email or password");
+    // ⭐ Handle inactive account
+    if (res?.error === "InactiveAccount") {
+      toast.error("Your account is inactive. Contact your administrator.");
       setLoading(false);
       return;
     }
 
-    router.push("/dashboard");
+    // ⭐ Handle invalid credentials
+    if (res?.error === "CredentialsSignin") {
+      toast.error("Invalid email or password.");
+      setLoading(false);
+      return;
+    }
+
+    // ⭐ Successful login
+    if (res?.ok) {
+      toast.success("Welcome back!");
+      router.push("/dashboard");
+      return;
+    }
+
+    setLoading(false);
   }
 
   return (
@@ -84,10 +98,6 @@ export default function LoginPage() {
                 className="h-10"
               />
             </div>
-
-            {error && (
-              <p className="text-sm text-red-500 text-center">{error}</p>
-            )}
 
             <Button
               type="submit"
