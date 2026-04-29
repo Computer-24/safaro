@@ -30,14 +30,10 @@ export default async function UsersPage() {
       <div className="flex items-start justify-end">
         <Link href="/admin/users/create">
           <Button
-            className="h-10 min-h-10 text-base flex items-center gap-2
-                       bg-green-600 text-white border border-green-600
-                       hover:bg-green-700 hover:shadow-md hover:-translate-y-0.5
-                       transition transform duration-150 ease-in-out
-                       focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-green-300"
-            aria-label="Create User"
+            className="bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
+            size="lg"
           >
-            <span>Create User</span>
+            Create User
           </Button>
         </Link>
       </div>

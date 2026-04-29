@@ -1,5 +1,6 @@
 "use client"
 
+import React, { useEffect } from "react"
 import { useForm, type Resolver } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
@@ -42,12 +43,15 @@ interface UpdateUserFormProps {
   }
   companies: CompanyOption[]
   approvers: ApproverOption[]
+  excludeUserId?: string | null
 }
+const NONE_VALUE = "__none"
 
 export default function UpdateUserForm({
   user,
   companies,
   approvers,
+  excludeUserId = null,
 }: UpdateUserFormProps) {
   const router = useRouter()
 
@@ -70,6 +74,19 @@ export default function UpdateUserForm({
     },
   })
 
+  // If excludeUserId changes or current approver equals excluded id, clear and set error
+  useEffect(() => {
+    const currentApprover = form.getValues("approverId")
+    if (excludeUserId && currentApprover === excludeUserId) {
+      form.setValue("approverId", null)
+      form.setError("approverId", {
+        type: "manual",
+        message: "Approver cannot be the same as the user being edited.",
+      })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [excludeUserId])
+
   const fieldClass = "h-[44px] min-h-[44px] w-full"
   const buttonHeight = "h-[44px] min-h-[44px]"
   const errorText = "text-sm text-red-500"
@@ -77,26 +94,52 @@ export default function UpdateUserForm({
   async function onSubmit(values: UpdateUserInput) {
     toast.dismiss()
 
+    // Client-side guard: prevent submitting self as approver
+    if (values.approverId && excludeUserId && values.approverId === excludeUserId) {
+      form.setError("approverId", {
+        type: "manual",
+        message: "Approver cannot be the same as the user being edited.",
+      })
+      toast.error("Cannot assign the user as their own approver")
+      return
+    }
+
     try {
       const result = await updateUserAction(values)
 
-      if (!result.success) {
-        const errorMap = result.error
+      // Narrow and handle result.error safely (result.error may be unknown)
+      if (!result?.success) {
+        const errorMap = result?.error
 
-        if (typeof errorMap.subordinates === "number") {
-          toast.error(
-            `⛔ ${errorMap._global?.[0] ?? "Cannot change role"} (${errorMap.subordinates} subordinate(s) must be reassigned)`
-          )
-        } else if (Array.isArray(errorMap._global)) {
-          toast.error(`⚠️ ${errorMap._global[0]}`)
+        // Helpful toast for special cases
+        if (errorMap && typeof errorMap === "object" && !Array.isArray(errorMap)) {
+          const subordinates = (errorMap as any).subordinates
+          const globalArr = (errorMap as any)._global
+
+          if (typeof subordinates === "number") {
+            toast.error(
+              `⛔ ${(globalArr && Array.isArray(globalArr) && globalArr[0]) || "Cannot change role"} (${subordinates} subordinate(s) must be reassigned)`
+            )
+          } else if (Array.isArray(globalArr) && globalArr.length > 0) {
+            toast.error(`⚠️ ${globalArr[0]}`)
+          } else {
+            toast.error("⚠️ Could not update user")
+          }
+
+          // Map field errors safely
+          for (const [field, messages] of Object.entries(errorMap as Record<string, unknown>)) {
+            if (field === "_global" || field === "subordinates") continue
+            if (Array.isArray(messages) && messages.length > 0 && typeof messages[0] === "string") {
+              form.setError(field as any, { message: messages[0] })
+            } else {
+              form.setError(field as any, { message: String(messages) })
+            }
+          }
         } else {
+          // fallback for unexpected shapes
           toast.error("⚠️ Could not update user")
+          form.setError("_global" as any, { message: String(errorMap) })
         }
-
-        Object.entries(errorMap).forEach(([field, messages]) => {
-          if (field === "_global" || field === "subordinates") return
-          form.setError(field as any, { message: messages[0] })
-        })
 
         return
       }
@@ -202,26 +245,37 @@ export default function UpdateUserForm({
             <div className="space-y-2">
               <Label>Approver</Label>
               <Select
-                defaultValue={user.approverId ?? undefined}
-                onValueChange={(v) => form.setValue("approverId", v)}
+                defaultValue={user.approverId ?? NONE_VALUE}
+                onValueChange={(v) => form.setValue("approverId", v === NONE_VALUE ? null : v)}
               >
                 <SelectTrigger className={fieldClass}>
                   <SelectValue placeholder="Select approver" />
                 </SelectTrigger>
                 <SelectContent>
+                  <SelectItem value={NONE_VALUE}>No approver</SelectItem>
                   {approvers.map((a) => (
-                    <SelectItem key={a.id} value={a.id}>
+                    <SelectItem
+                      key={a.id}
+                      value={a.id}
+                      disabled={excludeUserId ? a.id === excludeUserId : false}
+                      className={excludeUserId && a.id === excludeUserId ? "opacity-50 cursor-not-allowed" : ""}
+                    >
                       {a.name}
+                      {excludeUserId && a.id === excludeUserId ? " (cannot select this user)" : ""}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
+
               {form.formState.errors.approverId && (
                 <p className={errorText}>{form.formState.errors.approverId.message}</p>
               )}
+              {excludeUserId && (
+                <p className="text-sm text-gray-500 mt-1">You cannot assign the user being edited as their own approver.</p>
+              )}
             </div>
 
-            {/* BUTTONS: wrapper prevents space-y from interfering */}
+            {/* BUTTONS */}
             <div className="pt-2">
               <div className="flex items-center gap-3">
                 <Button

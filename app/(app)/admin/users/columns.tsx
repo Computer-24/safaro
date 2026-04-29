@@ -3,6 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
+import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import Link from "next/link";
 import { useState } from "react";
@@ -55,7 +56,7 @@ export const userColumns: ColumnDef<UserRow>[] = [
           ? "bg-red-500 text-white"
           : role === "APPROVER"
             ? "bg-blue-500 text-white"
-            : "bg-green-500 text-white";
+            : "bg-primary text-primary-foreground";
 
       return <Badge className={color}>{role}</Badge>;
     },
@@ -76,37 +77,49 @@ export const userColumns: ColumnDef<UserRow>[] = [
       return date.toLocaleDateString();
     },
   },
-{
-  id: "isActive",
-  accessorKey: "isActive",
-  header: ({ column }) => <SortHeader column={column} label="Active" />,
-  cell: ({ row }) => {
-    const user = row.original as { id: string; isActive: boolean; role?: string };
+  {
+    id: "isActive",
+    accessorKey: "isActive",
+    header: ({ column }) => (
+      <div className="flex justify-center">
+        <SortHeader column={column} label="Active" />
+      </div>
+    ),
+    cell: ({ row }) => {
+      const user = row.original as { id: string; isActive: boolean; role?: string };
 
-    const isAdmin = user.role === "ADMIN";
+      const isAdmin = user.role === "ADMIN";
 
-    return (
-      <div className="w-full flex items-center justify-center">
+      return (
+        <div className="flex items-center justify-center py-0">
           <UserActiveSwitch
             id={user.id}
             initial={user.isActive}
             disabled={isAdmin}
             disabledReason={isAdmin ? "Admins cannot be deactivated" : undefined}
           />
-      </div>
-    );
+        </div>
+      );
+    },
   },
-},
   {
     id: "actions",
-    header: "Actions",
+    header: () => (
+      <div className="flex justify-center">
+        <span>Actions</span>
+      </div>
+    ),
     cell: ({ row }) => (
-      <Link
-        href={`/admin/users/${row.original.id}`}
-        className="text-primary hover:underline"
-      >
-        Edit →
-      </Link>
+      <div style={{ display: "grid", placeItems: "center", width: "100%", minHeight: "40px" }}>
+        <Link href={`/admin/users/${row.original.id}`}>
+          <Button
+            className="bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
+            size="sm"
+          >
+            Edit
+          </Button>
+        </Link>
+      </div>
     ),
   },
 

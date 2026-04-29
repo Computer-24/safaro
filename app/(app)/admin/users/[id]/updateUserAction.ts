@@ -9,12 +9,23 @@ type ActionResult =
   | { success: true }
   | { success: false; error: Record<string, any> }
 
+const NONE_VALUE = "__none" // sentinel used by client Select
+
 export async function updateUserAction(values: unknown): Promise<ActionResult> {
   const parsed = updateUserSchema.safeParse(values)
   if (!parsed.success) {
     return { success: false, error: parsed.error.flatten().fieldErrors }
   }
   const data = parsed.data
+
+  // Defensive normalization of approverId
+  let approverId: string | null =
+    data.approverId === NONE_VALUE ? null : (data.approverId ?? null)
+  if (typeof approverId === "string" && approverId.trim() === "") approverId = null
+  if (approverId && approverId === data.id) {
+    // ignore self-approver assignment
+    approverId = null
+  }
 
   try {
     const result = await prisma.$transaction(async (tx) => {
@@ -26,31 +37,22 @@ export async function updateUserAction(values: unknown): Promise<ActionResult> {
         return { __error: { _global: ["User not found"] } }
       }
 
-      // NEW SAFEGUARD: Prevent removing the last ADMIN
-      // If the existing user is ADMIN and the update would remove ADMIN role,
-      // ensure there is more than one admin in the system.
+      // Prevent removing the last ADMIN
       if (existingUser.role === Role.ADMIN && data.role !== Role.ADMIN) {
-        const adminCount = await tx.user.count({
-          where: { role: Role.ADMIN },
-        })
-
+        const adminCount = await tx.user.count({ where: { role: Role.ADMIN } })
         if (adminCount <= 1) {
           return {
             __error: {
-              _global: [
-                "Cannot remove the last admin. At least one admin must remain.",
-              ],
+              _global: ["Cannot remove the last admin. At least one admin must remain."],
               admins: adminCount,
             },
           }
         }
       }
 
-      // SAFEGUARD: Prevent Approver -> User if subordinates exist
+      // Prevent Approver -> User if subordinates exist
       if (existingUser.role === Role.APPROVER && data.role === Role.USER) {
-        const subordinates = await tx.user.count({
-          where: { approverId: data.id },
-        })
+        const subordinates = await tx.user.count({ where: { approverId: data.id } })
         if (subordinates > 0) {
           return {
             __error: {
@@ -65,9 +67,7 @@ export async function updateUserAction(values: unknown): Promise<ActionResult> {
 
       // Email uniqueness check only if changed
       if (existingUser.email !== data.email) {
-        const emailExists = await tx.user.findUnique({
-          where: { email: data.email },
-        })
+        const emailExists = await tx.user.findUnique({ where: { email: data.email } })
         if (emailExists) {
           return { __error: { email: ["Email already exists"] } }
         }
@@ -82,15 +82,39 @@ export async function updateUserAction(values: unknown): Promise<ActionResult> {
         return { __error: { companyId: ["Selected company is not active or does not exist"] } }
       }
 
-      // Validate approver
-      if (data.approverId) {
+      // Validate approver using the normalized approverId
+      if (approverId) {
         const approver = await tx.user.findUnique({
-          where: { id: data.approverId },
-          select: { isActive: true, role: true },
+          where: { id: approverId },
+          select: { isActive: true, role: true, approverId: true },
         })
         if (!approver || !approver.isActive || approver.role !== Role.APPROVER) {
           return { __error: { approverId: ["Selected approver is not an active approver or does not exist"] } }
         }
+
+        // Cycle detection: walk the approver chain starting from the candidate approver.
+        // If we encounter the user being edited, assigning this approver would create a cycle.
+        // Use a Set to avoid infinite loops on pre-existing cycles.
+        // inside the transaction, where you do cycle detection
+        let current: string | null = approverId
+        const seen = new Set<string>()
+
+        while (current) {
+          if (current === data.id) {
+            return { __error: { approverId: ["Cannot assign this approver because it would make User A and User B approvers of each other"] } }
+          }
+          if (seen.has(current)) break
+          seen.add(current)
+
+          // give the DB row an explicit type so TS doesn't infer `any`
+          const row = await tx.user.findUnique({
+            where: { id: current },
+            select: { approverId: true },
+          }) as { approverId: string | null } | null
+
+          current = row?.approverId ?? null
+        }
+
       }
 
       // Hash password only if provided
@@ -104,7 +128,7 @@ export async function updateUserAction(values: unknown): Promise<ActionResult> {
           email: data.email,
           companyId: data.companyId,
           role: data.role,
-          approverId: data.approverId || null,
+          approverId: approverId,
           ...(hashedPassword ? { password: hashedPassword } : {}),
         },
       })

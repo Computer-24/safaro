@@ -23,6 +23,8 @@ import {
 type CompanyOption = { id: string; name: string }
 type ApproverOption = { id: string; name: string }
 
+const NONE_VALUE = "__none" // sentinel for "No approver" (must be non-empty)
+
 export default function CreateUserForm({
   companies,
   approvers,
@@ -44,9 +46,20 @@ export default function CreateUserForm({
     const result = await createUserAction(values)
 
     if (result?.error) {
-      Object.entries(result.error).forEach(([field, messages]) => {
-        form.setError(field as any, { message: messages[0] })
-      })
+      const err = result.error
+
+      if (err && typeof err === "object" && !Array.isArray(err)) {
+        for (const [field, messages] of Object.entries(err)) {
+          if (Array.isArray(messages) && messages.length > 0 && typeof messages[0] === "string") {
+            form.setError(field as any, { message: messages[0] })
+          } else {
+            form.setError(field as any, { message: String(messages) })
+          }
+        }
+      } else {
+        // fallback for unexpected shapes
+        form.setError("_global" as any, { message: String(err) })
+      }
 
       toast.error("Could not create user", {
         description: "Please fix the errors and try again",
@@ -55,20 +68,14 @@ export default function CreateUserForm({
       return
     }
 
-    toast.success("User created successfully", {
-      duration: 3000,
-    })
-
+    toast.success("User created successfully", { duration: 3000 })
     router.push("/admin/users")
   }
 
-  const fieldClass = "h-[44px] min-h-[44px] w-full"
-  const buttonHeight = "h-[44px] min-h-[44px]"
-  const errorText = "text-sm text-red-500"
 
   return (
     <div className="flex justify-center py-10">
-      <Card className="w-full max-w-lg shadow-md pb-8">
+      <Card className="w-full max-w-lg shadow-md">
         <CardHeader>
           <CardTitle className="text-center text-2xl font-semibold">
             Create User
@@ -84,10 +91,10 @@ export default function CreateUserForm({
               <Input
                 {...form.register("name")}
                 placeholder="John Doe"
-                className={fieldClass}
+                className="h-[44px] w-full"
               />
               {form.formState.errors.name && (
-                <p className={errorText}>{form.formState.errors.name.message}</p>
+                <p className="text-sm text-red-500">{form.formState.errors.name.message}</p>
               )}
             </div>
 
@@ -97,10 +104,10 @@ export default function CreateUserForm({
               <Input
                 {...form.register("email")}
                 placeholder="john@example.com"
-                className={fieldClass}
+                className="h-[44px] w-full"
               />
               {form.formState.errors.email && (
-                <p className={errorText}>{form.formState.errors.email.message}</p>
+                <p className="text-sm text-red-500">{form.formState.errors.email.message}</p>
               )}
             </div>
 
@@ -111,10 +118,10 @@ export default function CreateUserForm({
                 type="password"
                 {...form.register("password")}
                 placeholder="******"
-                className={fieldClass}
+                className="h-[44px] w-full"
               />
               {form.formState.errors.password && (
-                <p className={errorText}>{form.formState.errors.password.message}</p>
+                <p className="text-sm text-red-500">{form.formState.errors.password.message}</p>
               )}
             </div>
 
@@ -122,7 +129,7 @@ export default function CreateUserForm({
             <div className="space-y-2">
               <Label>Company</Label>
               <Select onValueChange={(v) => form.setValue("companyId", v)}>
-                <SelectTrigger className={fieldClass}>
+                <SelectTrigger className="h-[44px] min-h-[44px] w-full">
                   <SelectValue placeholder="Select company" />
                 </SelectTrigger>
                 <SelectContent>
@@ -134,7 +141,7 @@ export default function CreateUserForm({
                 </SelectContent>
               </Select>
               {form.formState.errors.companyId && (
-                <p className={errorText}>{form.formState.errors.companyId.message}</p>
+                <p className="text-sm text-red-500">{form.formState.errors.companyId.message}</p>
               )}
             </div>
 
@@ -142,7 +149,7 @@ export default function CreateUserForm({
             <div className="space-y-2">
               <Label>Role</Label>
               <Select onValueChange={(v) => form.setValue("role", v as any)}>
-                <SelectTrigger className={fieldClass}>
+                <SelectTrigger className="h-[44px] min-h-[44px] w-full">
                   <SelectValue placeholder="Select role" />
                 </SelectTrigger>
                 <SelectContent>
@@ -154,18 +161,22 @@ export default function CreateUserForm({
                 </SelectContent>
               </Select>
               {form.formState.errors.role && (
-                <p className={errorText}>{form.formState.errors.role.message}</p>
+                <p className="text-sm text-red-500">{form.formState.errors.role.message}</p>
               )}
             </div>
 
             {/* APPROVER */}
             <div className="space-y-2">
               <Label>Approver</Label>
-              <Select onValueChange={(v) => form.setValue("approverId", v)}>
-                <SelectTrigger className={fieldClass}>
+              <Select
+                // no defaultValue needed; placeholder will show when approverId is null
+                onValueChange={(v) => form.setValue("approverId", v === NONE_VALUE ? null : v)}
+              >
+                <SelectTrigger className="h-[44px] min-h-[44px] w-full">
                   <SelectValue placeholder="Select approver" />
                 </SelectTrigger>
                 <SelectContent>
+                  <SelectItem value={NONE_VALUE}>No approver</SelectItem>
                   {approvers.map((a) => (
                     <SelectItem key={a.id} value={a.id}>
                       {a.name}
@@ -174,32 +185,17 @@ export default function CreateUserForm({
                 </SelectContent>
               </Select>
               {form.formState.errors.approverId && (
-                <p className={errorText}>{form.formState.errors.approverId.message}</p>
+                <p className="text-sm text-red-500">{form.formState.errors.approverId.message}</p>
               )}
             </div>
 
-            {/* BUTTONS: side-by-side with emojis, Cancel in red */}
-            <div className="pt-2">
-              <div className="flex items-center gap-3">
-                <Button
-                  type="button"
-                  variant="outline"
-                  className={`flex-1 min-w-0 ${buttonHeight} text-base border-red-400 text-red-600 hover:bg-red-50`}
-                  onClick={() => router.push("/admin/users")}
-                >
-                  ✖ Cancel
-                </Button>
-
-                <Button
-                  type="submit"
-                  className={`flex-1 min-w-0 ${buttonHeight} text-base`}
-                  disabled={form.formState.isSubmitting}
-                >
-                  {form.formState.isSubmitting ? "Creating..." : "🎉 Create User"}
-                </Button>
-              </div>
-            </div>
-
+            <Button
+              type="submit"
+              className="w-full h-[44px] text-base"
+              disabled={form.formState.isSubmitting}
+            >
+              {form.formState.isSubmitting ? "Creating..." : "Create User"}
+            </Button>
           </form>
         </CardContent>
       </Card>
