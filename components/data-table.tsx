@@ -52,6 +52,9 @@ export function DataTable<TData, TValue>({
       columnFilters,
       columnVisibility,
     },
+    initialState: {
+      pagination: { pageIndex: 0, pageSize: 10 }, 
+    },
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
@@ -100,7 +103,7 @@ export function DataTable<TData, TValue>({
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
                       key={cell.id}
-                      className="whitespace-nowrap p-0"
+                      className="whitespace-nowrap px-4 py-2"
                       style={{ height: "auto" }}
                       data-col-id={cell.column.id}
                     >

@@ -1,12 +1,10 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "@/components/ui/badge";
-import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
+import { ColumnDef } from "@tanstack/react-table";
+import { format, parseISO } from "date-fns";
 import Link from "next/link";
-import { useState } from "react";
 import UserActiveSwitch from "./UserActiveSwitch";
 
 export type UserRow = {
@@ -17,7 +15,7 @@ export type UserRow = {
   companyName: string | null;
   approverName: string | null;
   createdAt: string;
-  isActive: boolean; // ⭐ required for toggle
+  isActive: boolean;
 };
 
 function SortHeader({ column, label }: any) {
@@ -55,8 +53,8 @@ export const userColumns: ColumnDef<UserRow>[] = [
         role === "ADMIN"
           ? "bg-red-500 text-white"
           : role === "APPROVER"
-            ? "bg-blue-500 text-white"
-            : "bg-primary text-primary-foreground";
+          ? "bg-blue-500 text-white"
+          : "bg-primary text-primary-foreground";
 
       return <Badge className={color}>{role}</Badge>;
     },
@@ -73,8 +71,9 @@ export const userColumns: ColumnDef<UserRow>[] = [
     accessorKey: "createdAt",
     header: ({ column }) => <SortHeader column={column} label="Created" />,
     cell: ({ row }) => {
-      const date = new Date(row.getValue("createdAt"));
-      return date.toLocaleDateString();
+      const raw = row.getValue("createdAt") as string;
+      const date = parseISO(raw);
+      return <span>{format(date, "PPP")}</span>;
     },
   },
   {
@@ -116,7 +115,7 @@ export const userColumns: ColumnDef<UserRow>[] = [
             className="bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
             size="sm"
           >
-            Edit
+            User Details
           </Button>
         </Link>
       </div>
@@ -131,3 +130,5 @@ export const userColumns: ColumnDef<UserRow>[] = [
     enableHiding: true,
   },
 ];
+
+export default userColumns;

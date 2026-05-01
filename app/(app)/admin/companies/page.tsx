@@ -1,60 +1,53 @@
-export default function CompaniesPage() {
+// app/(app)/admin/companies/page.tsx
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { prisma } from "@/lib/prisma";
+import { DataTable } from "@/components/data-table";
+import companyColumns, { CompanyRow } from "./columns";
+
+export default async function CompaniesPage() {
+  const companies = await prisma.company.findMany({
+    include: {
+      _count: {
+        select: { users: true },
+      },
+    },
+    orderBy: { createdAt: "desc" },
+  });
+
+  const rows: CompanyRow[] = companies.map((c) => ({
+    id: c.id,
+    name: c.name,
+    // If you add a location field to Company, map it here; otherwise leave null
+    location: (c as any).location ?? null,
+    employeesCount: c._count?.users ?? 0,
+    createdAt: c.createdAt.toISOString(),
+    isActive: c.isActive,
+  }));
+
   return (
-    <div className="space-y-6 w-full">
-      <h1 className="text-2xl font-semibold tracking-tight">Companies</h1>
-
-      <p className="text-muted-foreground">
-        Manage all registered companies in the Safaro platform.
-      </p>
-
-      <div className="grid gap-6 md:grid-cols-2">
-        <div className="rounded-lg border bg-card p-6 shadow-sm">
-          <h2 className="text-lg font-medium mb-2">Company Overview</h2>
-          <p className="text-sm text-muted-foreground">
-            This is a placeholder card. Add charts, stats, or summaries here.
-          </p>
-        </div>
-
-        <div className="rounded-lg border bg-card p-6 shadow-sm">
-          <h2 className="text-lg font-medium mb-2">Recent Activity</h2>
-          <p className="text-sm text-muted-foreground">
-            Another placeholder card. Add logs or updates here.
-          </p>
-        </div>
+    <div className="space-y-6">
+      <div className="flex items-start justify-end">
+        <Link href="/admin/companies/create">
+          <Button
+            className="bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
+            size="lg"
+          >
+            Create Company
+          </Button>
+        </Link>
       </div>
 
-      <div className="rounded-lg border bg-card p-6 shadow-sm">
-        <h2 className="text-lg font-medium mb-4">Company List</h2>
+      <Card>
+        <CardHeader>
+          <CardTitle>All Companies</CardTitle>
+        </CardHeader>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b">
-                <th className="py-2 text-left">Name</th>
-                <th className="py-2 text-left">Location</th>
-                <th className="py-2 text-left">Employees</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="border-b">
-                <td className="py-2">Acme Corp</td>
-                <td className="py-2">Riyadh</td>
-                <td className="py-2">120</td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-2">GlobalTech</td>
-                <td className="py-2">Dammam</td>
-                <td className="py-2">85</td>
-              </tr>
-              <tr>
-                <td className="py-2">Desert Logistics</td>
-                <td className="py-2">Jeddah</td>
-                <td className="py-2">40</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+        <CardContent>
+          <DataTable columns={companyColumns} data={rows} />
+        </CardContent>
+      </Card>
     </div>
-  )
+  );
 }

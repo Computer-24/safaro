@@ -1,33 +1,33 @@
 "use client"
 
-import React, { useEffect } from "react"
-import { useForm, type Resolver } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
+import { useEffect } from "react"
+import { useForm, type Resolver } from "react-hook-form"
 import { toast } from "sonner"
 
-import { updateUserSchema, type UpdateUserInput } from "./updateUserSchema"
 import { updateUserAction } from "./updateUserAction"
+import { updateUserSchema, type UpdateUserInput } from "./updateUserSchema"
 
+import { Button } from "@/components/ui/button"
 import {
   Card,
+  CardContent,
   CardHeader,
   CardTitle,
-  CardContent,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
 import {
   Select,
-  SelectTrigger,
-  SelectValue,
   SelectContent,
   SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select"
 
-import { RoleEnum } from "../create/schema"
 import { Role } from "@/app/(app)/generated/prisma/enums"
+import { RoleEnum } from "../create/schema"
 
 type CompanyOption = { id: string; name: string }
 type ApproverOption = { id: string; name: string }

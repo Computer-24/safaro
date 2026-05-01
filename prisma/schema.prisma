@@ -24,6 +24,14 @@ model User {
   createdAt  DateTime @default(now())
 
   isActive   Boolean  @default(true)
+
+  @@index([companyId])
+  @@index([approverId])
+  @@index([isActive])
+  @@index([createdAt])
+  @@index([companyId, isActive])
+  @@index([companyId, role, isActive])
+  @@index([approverId, isActive])
 }
 
 model Company {
@@ -33,7 +41,11 @@ model Company {
   createdAt DateTime @default(now())
 
   isActive  Boolean  @default(true)
+
+  @@index([isActive])
+  @@index([createdAt])
 }
+
 
 enum Role {
   USER

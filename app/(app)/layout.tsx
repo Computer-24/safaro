@@ -1,21 +1,18 @@
-import { AppProviders } from "./providers"
-import { AppNav } from "@/components/app-nav"
+// app/admin/companies/[id]/layout.tsx
+import { SidebarLayout } from "@/components/SidebarLayout"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { AppProviders } from "./providers"
 
-export default async function AppLayout({ children }: { children: React.ReactNode }) {
+export default async function CompanyLayout({ children }: { children: React.ReactNode }) {
   const session = await getServerSession(authOptions)
   const role = session?.user.role ?? "USER"
 
   return (
     <AppProviders>
-      <div className="min-h-screen flex">
-        <main className="flex-1 p-6 overflow-x-auto">
-          {children}
-        </main>
-
-        <AppNav role={role} />
-      </div>
+      <SidebarLayout role={role}>
+        {children}
+      </SidebarLayout>
     </AppProviders>
   )
 }
