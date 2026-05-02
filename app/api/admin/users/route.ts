@@ -1,4 +1,4 @@
-// app/api/admin/companies/[id]/users/route.ts
+// app/api/admin/users/route.ts
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
@@ -9,11 +9,9 @@ import { Role } from "@/app/(app)/generated/prisma/enums";
 const DEFAULT_SORT = { sortBy: "createdAt", sortDir: "desc" } as const;
 
 /**
- * Allowed sort map for company-scoped user list.
- * - type "field" => orderBy: { [field]: dir }
- * - type "relation" => orderBy: { [relation]: { [subKey]: dir } }
- *
- * Keys must match the column ids used by the client table.
+ * Map client-visible column ids to safe Prisma order descriptors.
+ * type: "field" => orderBy: { [field]: dir }
+ * type: "relation" => orderBy: { [relation]: { [field]: dir } }
  */
 const ALLOWED_SORT_MAP: Record<
   string,
@@ -24,16 +22,12 @@ const ALLOWED_SORT_MAP: Record<
   role: { type: "field", key: "role" },
   isActive: { type: "field", key: "isActive" },
   createdAt: { type: "field", key: "createdAt" },
-  // relation sorts (if you allow them in the embedded list)
+  // relation sorts: company.name and approver.name
   companyName: { type: "relation", key: "company", subKey: "name" },
   approverName: { type: "relation", key: "approver", subKey: "name" },
 };
 
-export async function GET(req: Request, context: any) {
-  // resolve params from context (Next app router passes params here)
-  const resolvedParams = await context.params;
-  const companyId = resolvedParams?.id;
-
+export async function GET(req: Request) {
   const session = await getServerSession(authOptions);
   if (!session?.user) {
     return NextResponse.json({ message: "Unauthenticated" }, { status: 401 });
@@ -41,50 +35,38 @@ export async function GET(req: Request, context: any) {
   if (session.user.role !== Role.ADMIN) {
     return NextResponse.json({ message: "Forbidden" }, { status: 403 });
   }
-  if (!companyId) {
-    return NextResponse.json({ message: "Missing company id" }, { status: 400 });
-  }
 
   const url = new URL(req.url);
   const page = Math.max(1, Number(url.searchParams.get("page")) || 1);
   const pageSize = normalizePageSize(Number(url.searchParams.get("pageSize")));
+  const companyFilter = url.searchParams.get("company") || undefined;
   const q = url.searchParams.get("q") || undefined;
 
-  // parse sort params with fallback to default
+  // parse sort params
   const rawSortBy = (url.searchParams.get("sortBy") || DEFAULT_SORT.sortBy).trim();
   const rawSortDir = (url.searchParams.get("sortDir") || DEFAULT_SORT.sortDir).toLowerCase();
   const sortDir = rawSortDir === "asc" ? "asc" : "desc";
 
-  // build where clause scoped to company
-  const where: any = { companyId };
-  if (q) {
-    where.OR = [
-      { name: { contains: q, mode: "insensitive" } },
-      { email: { contains: q, mode: "insensitive" } },
-    ];
-  }
+  // build where
+  const where: any = {};
+  if (companyFilter) where.companyId = companyFilter;
+  if (q) where.OR = [
+    { name: { contains: q, mode: "insensitive" } },
+    { email: { contains: q, mode: "insensitive" } },
+  ];
 
-  // map requested sort to a safe descriptor
+  // map sort
   const mapped = ALLOWED_SORT_MAP[rawSortBy] ?? ALLOWED_SORT_MAP[DEFAULT_SORT.sortBy];
 
-  // build safe orderBy for Prisma
+  // build safe orderBy
   let orderBy: any;
   if (mapped.type === "relation") {
-    // e.g. { approver: { name: 'asc' } }
+    // e.g. { company: { name: 'asc' } }
     orderBy = { [mapped.key]: { [mapped.subKey as string]: sortDir } };
   } else {
     // e.g. { createdAt: 'desc' }
     orderBy = { [mapped.key]: sortDir };
   }
-
-  // debug log for development
-  console.debug("GET /api/admin/companies/:id/users sort request:", {
-    companyId,
-    rawSortBy,
-    sortDir,
-    mapped,
-    orderBy,
-  });
 
   try {
     const [users, total] = await prisma.$transaction([
@@ -108,7 +90,7 @@ export async function GET(req: Request, context: any) {
     ]);
 
     return NextResponse.json({
-      users: users.map((u) => ({ ...u, createdAt: u.createdAt.toISOString() })),
+      users: users.map(u => ({ ...u, createdAt: u.createdAt.toISOString() })),
       meta: {
         total,
         page,
@@ -117,7 +99,7 @@ export async function GET(req: Request, context: any) {
       },
     });
   } catch (err) {
-    console.error("GET /api/admin/companies/:id/users error:", err);
+    console.error("GET /api/admin/users error:", err);
     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
   }
 }

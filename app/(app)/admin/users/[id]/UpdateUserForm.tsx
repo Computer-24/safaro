@@ -118,12 +118,12 @@ export default function UpdateUserForm({
 
           if (typeof subordinates === "number") {
             toast.error(
-              `⛔ ${(globalArr && Array.isArray(globalArr) && globalArr[0]) || "Cannot change role"} (${subordinates} subordinate(s) must be reassigned)`
+              `${(globalArr && Array.isArray(globalArr) && globalArr[0]) || "Cannot change role"} (${subordinates} subordinate(s) must be reassigned)`
             )
           } else if (Array.isArray(globalArr) && globalArr.length > 0) {
-            toast.error(`⚠️ ${globalArr[0]}`)
+            toast.error(`${globalArr[0]}`)
           } else {
-            toast.error("⚠️ Could not update user")
+            toast.error("Could not update user")
           }
 
           // Map field errors safely
@@ -137,7 +137,7 @@ export default function UpdateUserForm({
           }
         } else {
           // fallback for unexpected shapes
-          toast.error("⚠️ Could not update user")
+          toast.error("Could not update user")
           form.setError("_global" as any, { message: String(errorMap) })
         }
 
@@ -148,7 +148,7 @@ export default function UpdateUserForm({
       router.push("/admin/users")
     } catch (err) {
       console.error(err)
-      toast.error("⚠️ Unexpected error while updating user")
+      toast.error("Unexpected error while updating user")
     }
   }
 

@@ -1,6 +1,7 @@
-"use client"
+// components/DataTable.tsx
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   ColumnDef,
   flexRender,
@@ -12,7 +13,8 @@ import {
   ColumnFiltersState,
   VisibilityState,
   useReactTable,
-} from "@tanstack/react-table"
+  Updater,
+} from "@tanstack/react-table";
 
 import {
   Table,
@@ -21,28 +23,43 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from "@/components/ui/table";
 
-import { Input } from "@/components/ui/input"
-import { DataTablePagination } from "./data-table-pagination"
+import { Input } from "@/components/ui/input";
+import { DataTablePagination } from "./data-table-pagination";
+import { DEFAULT_PAGE_SIZE } from "@/lib/pagination";
+
+interface ServerPagination {
+  total: number | null;
+  page: number; // 1-based
+  pageSize: number;
+  loading?: boolean;
+  onPageChange: (newPageIndex0Based: number) => void;
+  onPageSizeChange: (newPageSize: number) => void;
+  onSortChange?: (sortBy: SortingState) => void;
+}
 
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+  columns: ColumnDef<TData, TValue>[];
+  data: TData[];
+  serverPagination?: ServerPagination | null;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  serverPagination = null,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([
     { id: "createdAt", desc: true },
-  ])
+  ]);
 
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({
-    search: false, // hide helper search column
-  })
+    search: false,
+  });
+
+  const isServer = !!serverPagination;
 
   const table = useReactTable({
     data,
@@ -53,20 +70,57 @@ export function DataTable<TData, TValue>({
       columnVisibility,
     },
     initialState: {
-      pagination: { pageIndex: 0, pageSize: 10 }, 
+      pagination: {
+        pageIndex: isServer ? Math.max(0, (serverPagination?.page ?? 1) - 1) : 0,
+        pageSize: isServer ? serverPagination?.pageSize ?? DEFAULT_PAGE_SIZE : DEFAULT_PAGE_SIZE,
+      },
     },
-    onSortingChange: setSorting,
+    pageCount: isServer && serverPagination?.total ? Math.ceil(serverPagination.total / serverPagination.pageSize) : undefined,
+    manualPagination: isServer,
+    manualSorting: isServer, // tell react-table sorting is server-driven
+    // CUSTOM handler instead of passing setSorting directly
+    onSortingChange: (updaterOrValue: SortingState | Updater<SortingState>) => {
+      // resolve the actual next sorting state whether react-table passed a value or an updater
+      const nextSorting: SortingState =
+        typeof updaterOrValue === "function"
+          ? (updaterOrValue as (old: SortingState) => SortingState)(sorting)
+          : (updaterOrValue as SortingState);
+
+      // update local state
+      setSorting(nextSorting);
+
+      // if server-driven, notify parent and reset to first page
+      if (isServer && serverPagination?.onSortChange) {
+        const payload = nextSorting.map((s) => ({ id: String(s.id), desc: !!s.desc }));
+        serverPagination.onSortChange(payload);
+        serverPagination.onPageChange(0); // go to first page (0-based index for onPageChange)
+      }
+    },
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
+    ...(isServer ? {} : { getSortedRowModel: getSortedRowModel() }),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-  })
+  });
+
+  React.useEffect(() => {
+    if (!isServer || !serverPagination) return;
+    if (serverPagination.loading) return; // preserve optimistic UI while loading
+
+    const pageIndex0 = Math.max(0, serverPagination.page - 1);
+    if (table.getState().pagination.pageIndex !== pageIndex0) {
+      table.setPageIndex(pageIndex0);
+    }
+    if (table.getState().pagination.pageSize !== serverPagination.pageSize) {
+      table.setPageSize(serverPagination.pageSize);
+    }
+  }, [isServer, serverPagination, table]);
+
+
 
   return (
     <div className="space-y-4 w-full">
-      {/* Global Search */}
       <Input
         placeholder="Search users..."
         value={(table.getColumn("search")?.getFilterValue() as string) ?? ""}
@@ -76,7 +130,6 @@ export function DataTable<TData, TValue>({
         className="max-w-sm"
       />
 
-      {/* Responsive Table Container */}
       <div className="rounded-md border overflow-x-auto w-full">
         <Table className="min-w-full">
           <TableHeader>
@@ -123,7 +176,9 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
 
-      <DataTablePagination table={table} />
+      <DataTablePagination table={table} serverPagination={serverPagination} />
     </div>
-  )
+  );
 }
+
+export default DataTable;

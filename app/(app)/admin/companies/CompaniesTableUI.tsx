@@ -1,20 +1,22 @@
-// app/(app)/admin/users/UsersTableUI.tsx
+// app/(app)/admin/companies/CompaniesTableUI.tsx
+"use client";
+
+import companyColumns, { CompanyRow } from "@/app/(app)/admin/companies/columns";
 import { DataTable } from "@/components/data-table";
-import type { SortingState } from "@tanstack/react-table";
-import { UserRow, userColumns } from "./columns";
+import { SortingState } from "@tanstack/react-table";
 
 type Props = {
-  rows: UserRow[];
+  rows: CompanyRow[];
   total: number | null;
   page: number; // 1-based
   pageSize: number;
   loading: boolean;
   onPageChange: (newPageIndex0Based: number) => void;
   onPageSizeChange: (newPageSize: number) => void;
-  onSortChange?: (sortBy: SortingState) => void;
+  onSortChange?: (sortBy: SortingState) => void; 
 };
 
-export default function UsersTableUI({
+export default function CompaniesTableUI({
   rows,
   total,
   page,
@@ -26,15 +28,15 @@ export default function UsersTableUI({
 }: Props) {
   return (
     <DataTable
-      columns={userColumns}
+      columns={companyColumns}
       data={rows}
       serverPagination={{
         total,
         page,
         pageSize,
+        loading,
         onPageChange,
         onPageSizeChange,
-        loading,
         onSortChange,
       }}
     />

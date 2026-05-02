@@ -37,7 +37,7 @@ export function UsersToggleButton({ ariaControlsId = "company-users" }: { ariaCo
       aria-controls={ariaControlsId}
       className="bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
     >
-      {open ? "Hide users" : "View users"}
+      {open ? "Hide users" : "Show users"}
     </Button>
   );
 }
