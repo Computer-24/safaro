@@ -1,8 +1,8 @@
 // app/(app)/admin/companies/[id]/page.tsx
 import { Role } from "@/app/(app)/generated/prisma/enums";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import EditCompanyModal from "@/components/admin/EditCompanyModal";
 import { UsersPanel, UsersPanelProvider, UsersToggleButton } from "@/components/admin/UsersPanel";
-import { Button } from "@/components/ui/button";
 import { prisma } from "@/lib/prisma";
 import { format } from "date-fns";
 import { getServerSession } from "next-auth";
@@ -107,14 +107,7 @@ export default async function CompanyPage({ params }: UpdatedProps) {
                 <div className="mt-3 flex flex-col gap-2 flex-1">
                   {/* Toggle button placed here (client) */}
                   <UsersToggleButton />
-                  <Link href={`/admin/companies/${company.id}/edit`} className="w-full inline-flex justify-center">
-                    <Button
-                      className="bg-primary text-primary-foreground hover:opacity-90 transition-opacity w-full"
-                      size="lg"
-                    >
-                      Edit Company
-                    </Button>
-                  </Link>
+                  <EditCompanyModal company={company} />
                 </div>
               </div>
 

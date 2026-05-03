@@ -87,8 +87,9 @@ export default function UpdateUserForm({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [excludeUserId])
 
-  const fieldClass = "h-[44px] min-h-[44px] w-full"
-  const buttonHeight = "h-[44px] min-h-[44px]"
+  // Reduced heights so the form fits the viewport without causing page scroll
+  const fieldClass = "h-10 min-h-[40px] w-full"
+  const buttonHeight = "h-10 min-h-[40px]"
   const errorText = "text-sm text-red-500"
 
   async function onSubmit(values: UpdateUserInput) {
@@ -153,16 +154,19 @@ export default function UpdateUserForm({
   }
 
   return (
-    <div className="flex justify-center py-10">
-      <Card className="w-full max-w-lg shadow-md pb-8">
+    // align to top and reduce outer padding so the card fits the viewport
+    <div className="flex justify-center items-start py-6">
+      {/* constrain card height and hide overflow so it doesn't push the page */}
+      <Card className="w-full max-w-lg shadow-md pb-0 max-h-[calc(100vh-6rem)] overflow-hidden">
         <CardHeader>
-          <CardTitle className="text-center text-2xl font-semibold">
+          <CardTitle className="text-center text-2xl font-semibold py-4">
             Edit User
           </CardTitle>
         </CardHeader>
 
-        <CardContent>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        {/* make the form area scroll internally if it exceeds available height */}
+        <CardContent className="px-6 pt-0 pb-4 overflow-auto max-h-[calc(100vh-14rem)]">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
 
             {/* NAME */}
             <div className="space-y-2">
@@ -205,7 +209,7 @@ export default function UpdateUserForm({
                 <SelectTrigger className={fieldClass}>
                   <SelectValue placeholder="Select company" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="z-50">
                   {companies.map((c) => (
                     <SelectItem key={c.id} value={c.id}>
                       {c.name}
@@ -228,7 +232,7 @@ export default function UpdateUserForm({
                 <SelectTrigger className={fieldClass}>
                   <SelectValue placeholder="Select role" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="z-50">
                   {RoleEnum.map((role) => (
                     <SelectItem key={role} value={role}>
                       {role}
@@ -251,7 +255,7 @@ export default function UpdateUserForm({
                 <SelectTrigger className={fieldClass}>
                   <SelectValue placeholder="Select approver" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="z-50">
                   <SelectItem value={NONE_VALUE}>No approver</SelectItem>
                   {approvers.map((a) => (
                     <SelectItem
@@ -303,3 +307,4 @@ export default function UpdateUserForm({
     </div>
   )
 }
+

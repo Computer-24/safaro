@@ -5,6 +5,7 @@ import UpdateUserForm from "./UpdateUserForm";
 import { notFound, redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import Link from "next/link";
 
 interface UpdateUserPageProps {
   params: Promise<{ id: string }> | { id?: string };
@@ -62,11 +63,22 @@ export default async function UpdateUserPage({ params }: UpdateUserPageProps) {
   });
 
   return (
-    <UpdateUserForm
-      user={user}
-      companies={companies}
-      approvers={approvers}
-      excludeUserId={userId}
-    />
+      <div className="max-w-3xl mx-auto py-8 px-4">
+      <header className="mb-6 flex items-center justify-end">
+        <Link
+          href="/admin/users"
+          className="inline-flex items-center rounded-md border px-3 py-1 text-sm hover:bg-muted"
+        >
+          ← Back to users
+        </Link>
+      </header>
+
+      <UpdateUserForm
+        user={user}
+        companies={companies}
+        approvers={approvers}
+        excludeUserId={userId}
+      />
+    </div>
   );
 }

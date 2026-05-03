@@ -32,13 +32,14 @@ export function UsersToggleButton({ ariaControlsId = "company-users" }: { ariaCo
   return (
     <Button
       onClick={toggle}
-      size={"lg"}
+      size="lg"
       aria-expanded={open}
       aria-controls={ariaControlsId}
-      className="bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
+      className="h-10 md:h-10 px-4 py-3 text-base font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-opacity relative z-30"
     >
       {open ? "Hide users" : "Show users"}
     </Button>
+
   );
 }
 

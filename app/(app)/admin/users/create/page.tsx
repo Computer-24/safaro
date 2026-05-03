@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { APPROVER_LIST_DROPDOWN_CAP } from "@/lib/pagination";
+import Link from "next/link";
 
 export default async function CreateUserPage() {
   // Server-side session + RBAC: only admins can create users
@@ -32,5 +33,18 @@ export default async function CreateUserPage() {
     take: APPROVER_LIST_DROPDOWN_CAP, // safety cap to avoid huge payloads; tune as needed
   });
 
-  return <CreateUserForm companies={companies} approvers={approvers} />;
+  return (
+    <div className="max-w-3xl mx-auto py-8 px-4">
+      <header className="mb-6 flex items-center justify-end">
+        <Link
+          href="/admin/users"
+          className="inline-flex items-center rounded-md border px-3 py-1 text-sm hover:bg-muted"
+        >
+          ← Back to users
+        </Link>
+      </header>
+
+      <CreateUserForm companies={companies} approvers={approvers} />
+    </div>
+  );
 }
