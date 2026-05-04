@@ -1,10 +1,10 @@
 // app/api/admin/users/route.ts
-import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { prisma } from "@/lib/prisma";
-import { normalizePageSize } from "@/lib/pagination";
 import { Role } from "@/app/(app)/generated/prisma/enums";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { normalizePageSize } from "@/lib/pagination";
+import { prisma } from "@/lib/prisma";
+import { getServerSession } from "next-auth";
+import { NextResponse } from "next/server";
 
 const DEFAULT_SORT = { sortBy: "createdAt", sortDir: "desc" } as const;
 
@@ -26,6 +26,8 @@ const ALLOWED_SORT_MAP: Record<
   companyName: { type: "relation", key: "company", subKey: "name" },
   approverName: { type: "relation", key: "approver", subKey: "name" },
 };
+
+
 
 export async function GET(req: Request) {
   const session = await getServerSession(authOptions);
@@ -103,3 +105,5 @@ export async function GET(req: Request) {
     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
   }
 }
+
+

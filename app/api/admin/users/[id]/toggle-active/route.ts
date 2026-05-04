@@ -5,19 +5,6 @@ import { Role } from "@/app/(app)/generated/prisma/enums";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-/**
- * NOTE: This implementation requires:
- * - next-auth session available via getServerSession(authOptions)
- * - (optional) AuditLog model in Prisma for audit entries
- *
- * Policy enforced here:
- * - Only ADMINs can perform activation or deactivation.
- * - Admins cannot deactivate users with role ADMIN.
- * - All checks + update run inside a transaction to avoid TOCTOU.
- * - Subordinate counts are scoped to active subordinates.
- * - Lightweight in-memory rate limiter (single-process). Replace with Redis/Upstash for production.
- */
-
 /* Lightweight in-memory rate limiter (single-process). Replace with shared store in prod. */
 const RATE_LIMIT_WINDOW_MS = 60_000;
 const RATE_LIMIT_MAX = 30;
