@@ -211,10 +211,10 @@ export default function EditUserModal({
                 </Button>
             </DialogTrigger>
 
-            <DialogContent className="sm:max-w-lg" aria-describedby="edit-user-desc">
+            <DialogContent className="sm:max-w-lg">
                 <DialogHeader>
                     <DialogTitle>Edit user</DialogTitle>
-                    <DialogDescription id="edit-user-desc">
+                    <DialogDescription>
                         Update user details. Leave the password blank to keep the current password.
                     </DialogDescription>
                 </DialogHeader>

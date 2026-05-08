@@ -4,11 +4,12 @@
 import UsersTableUI from "@/app/(app)/admin/users/UsersTableUI";
 import { UserRow } from "@/app/(app)/admin/users/columns";
 import { DEFAULT_PAGE_SIZE } from "@/lib/pagination";
+import usersEvents from "@/lib/usersEvents";
+import type { SortingState } from "@tanstack/react-table";
 import { useCallback, useEffect, useState } from "react";
+import { EmptyBadge } from "../EmptyBadge";
 import { ErrorBadge } from "../ErrorBadge";
 import { LoadingBadge } from "../LoadingBadge";
-import { EmptyBadge } from "../EmptyBadge";
-import type { SortingState } from "@tanstack/react-table";
 
 type Props = {
   companyId?: string;
@@ -94,9 +95,25 @@ export default function UsersTable({ companyId, apiUrl }: Props) {
   }, [companyId, page, pageSize, sort, apiUrl]);
 
   useEffect(() => {
-    const ac = new AbortController();
-    fetchUsers(ac.signal);
-    return () => ac.abort();
+    const controllers = new Set<AbortController>();
+
+    const doFetch = () => {
+      const c = new AbortController();
+      controllers.add(c);
+      fetchUsers(c.signal).finally(() => controllers.delete(c));
+    };
+
+    // initial
+    doFetch();
+
+    const onCreated = () => doFetch();
+    usersEvents.addEventListener("users:created", onCreated);
+
+    return () => {
+      usersEvents.removeEventListener("users:created", onCreated);
+      controllers.forEach((c) => c.abort());
+      controllers.clear();
+    };
   }, [fetchUsers]);
 
   // Handlers used by DataTablePagination (0-based index from table)
