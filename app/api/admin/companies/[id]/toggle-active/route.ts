@@ -6,33 +6,18 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { Role } from "@/app/(app)/generated/prisma/enums";
 
 /**
- * Lightweight in-memory rate limiter (single-process).
- * Replace with a shared store (Redis/Upstash) for production.
+ * NOTE
+ * Rate limiting has been removed from this handler.
+ * For production, consider adding a distributed rate limiter (Redis/Upstash or a library)
  */
-const RATE_LIMIT_WINDOW_MS = 60_000; // 1 minute
-const RATE_LIMIT_MAX = 30; // max requests per window
-if (!(global as any).__companyToggleRateMap) {
-  (global as any).__companyToggleRateMap = new Map<string, number[]>();
-}
-const rateMap: Map<string, number[]> = (global as any).__companyToggleRateMap;
-
-function isRateLimited(key: string) {
-  const now = Date.now();
-  const windowStart = now - RATE_LIMIT_WINDOW_MS;
-  const hits = rateMap.get(key) ?? [];
-  const recent = hits.filter((t) => t > windowStart);
-  recent.push(now);
-  rateMap.set(key, recent);
-  return recent.length > RATE_LIMIT_MAX;
-}
 
 export async function PATCH(req: NextRequest, context: any) {
   try {
+    // Extract route params (compatible with App Router route handlers)
     const resolvedContext = await context;
     const params = await resolvedContext?.params;
     const companyId = params?.id;
-
-    if (!companyId) {
+    if (!companyId || typeof companyId !== "string") {
       return NextResponse.json({ message: "Missing route parameter: id" }, { status: 400 });
     }
 
@@ -40,13 +25,6 @@ export async function PATCH(req: NextRequest, context: any) {
     const session = await getServerSession(authOptions);
     if (!session?.user?.id) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-    }
-
-    // Rate limit by actor id
-    const actorId = session.user.id as string;
-    const actorKey = `actor:${actorId}`;
-    if (isRateLimited(actorKey)) {
-      return NextResponse.json({ message: "Too many requests" }, { status: 429 });
     }
 
     // Only admins may toggle company active status
@@ -72,10 +50,7 @@ export async function PATCH(req: NextRequest, context: any) {
     const result = await prisma.$transaction(async (tx) => {
       const company = await tx.company.findUnique({
         where: { id: companyId },
-        select: {
-          id: true,
-          isActive: true,
-        },
+        select: { id: true, isActive: true },
       });
 
       if (!company) {
@@ -91,12 +66,15 @@ export async function PATCH(req: NextRequest, context: any) {
         if (activeUsers > 0) {
           return {
             status: 400,
-            body: { message: "Cannot deactivate company while it has active users. Deactivate or reassign users first" },
+            body: {
+              message:
+                "Cannot deactivate company while it has active users. Deactivate or reassign users first",
+            },
           };
         }
       }
 
-      // If activating: no additional checks here, but keep transaction for atomicity
+      // Update company active flag
       const updated = await tx.company.update({
         where: { id: companyId },
         data: { isActive },

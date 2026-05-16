@@ -7,23 +7,98 @@ datasource db {
   provider = "postgresql"
 }
 
-model User {
-  id         String   @id @default(cuid())
-  name       String
-  email      String   @unique
-  password   String
+enum Role {
+  USER
+  APPROVER
+  ADMIN
+}
 
-  companyId  String
-  company    Company  @relation(fields: [companyId], references: [id])
+enum ItemType {
+  TICKET
+  INVESTIGATION
+  ACTION
+}
+
+enum Severity {
+  NONE
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum TicketStatus {
+  PENDING_REVIEW
+  INVESTIGATION
+  IMPLEMENTATION
+  VERIFICATION
+  CLOSED
+}
+
+enum InvestigationStatus {
+  OPEN
+  RESOLVED
+  CLOSED
+}
+
+enum ActionStatus {
+  OPEN
+  COMPLETED
+  VERIFIED
+}
+
+enum ObservationType {
+  POSITIVE
+  NEGATIVE
+}
+
+enum TicketCategory {
+  BEHAVIOR
+  CONDITION
+  NEAR_MISS
+  EQUIPMENT
+  PPE
+  HOUSEKEEPING
+  ERGONOMICS
+  CHEMICAL
+  FIRE_SAFETY
+  ELECTRICAL
+  ENVIRONMENT
+  SECURITY
+  OTHER
+}
+
+model User {
+  id       String @id @default(cuid())
+  name     String
+  email    String @unique
+  password String
+
+  companyId String
+  company   Company @relation(fields: [companyId], references: [id], onDelete: Restrict, onUpdate: Cascade)
 
   approverId String?
-  approver   User?    @relation("ApproverRelation", fields: [approverId], references: [id])
-  delegates  User[]   @relation("ApproverRelation")
+  approver   User?   @relation("ApproverRelation", fields: [approverId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  delegates  User[]  @relation("ApproverRelation")
 
-  role       Role     @default(USER)
-  createdAt  DateTime @default(now())
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
 
-  isActive   Boolean  @default(true)
+  isActive Boolean @default(true)
+
+  ticketsReported        Ticket[]        @relation("ReporterRelation")
+  ticketsApproved        Ticket[]        @relation("ApproverRelationTicket")
+  ticketsInvestigated    Ticket[]        @relation("InvestigatorRelationTicket")
+  investigationsAssigned Investigation[] @relation("InvestigationInvestigatorRelation")
+  actionsOwned           Action[]        @relation("ActionOwnerRelation")
+  actionsVerified        Action[]        @relation("ActionVerifierRelation")
+  archivedTickets        Ticket[]        @relation("ArchivedByRelation")
+  createdTickets         Ticket[]        @relation("CreatedByTicket")
+  updatedTickets         Ticket[]        @relation("UpdatedByTicket")
+  createdInvestigations  Investigation[] @relation("CreatedByInvestigation")
+  updatedInvestigations  Investigation[] @relation("UpdatedByInvestigation")
+  createdActions         Action[]        @relation("CreatedByAction")
+  updatedActions         Action[]        @relation("UpdatedByAction")
 
   @@index([companyId])
   @@index([approverId])
@@ -40,15 +115,178 @@ model Company {
   users     User[]
   createdAt DateTime @default(now())
 
-  isActive  Boolean  @default(true)
+  isActive Boolean @default(true)
+
+  tickets        Ticket[]
+  investigations Investigation[]
+  actions        Action[]
 
   @@index([isActive])
   @@index([createdAt])
 }
 
+model Ticket {
+  id        String  @id @default(cuid())
+  companyId String
+  company   Company @relation(fields: [companyId], references: [id], onDelete: Restrict, onUpdate: Cascade)
 
-enum Role {
-  USER
-  APPROVER
-  ADMIN
+  title           String
+  description     String
+  observationType ObservationType @default(NEGATIVE)
+  category        TicketCategory
+  severity        Severity        @default(NONE)
+  status          TicketStatus    @default(PENDING_REVIEW)
+
+  reporterId String
+  reporter   User   @relation("ReporterRelation", fields: [reporterId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  approverId String
+  approver   User   @relation("ApproverRelationTicket", fields: [approverId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  investigatorId String?
+  investigator   User?   @relation("InvestigatorRelationTicket", fields: [investigatorId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+
+  investigation Investigation?
+
+  createdById String
+  createdBy   User    @relation("CreatedByTicket", fields: [createdById], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  updatedById String?
+  updatedBy   User?   @relation("UpdatedByTicket", fields: [updatedById], references: [id], onDelete: SetNull, onUpdate: Cascade)
+
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  archivedAt DateTime?
+
+  archivedById String?
+  archivedBy   User?   @relation("ArchivedByRelation", fields: [archivedById], references: [id], onDelete: SetNull, onUpdate: Cascade)
+
+  inboxTicket InboxTicket?
+
+  @@index([companyId])
+  @@index([status])
+  @@index([createdAt])
+  @@index([reporterId])
+  @@index([approverId])
+  @@index([investigatorId])
+  @@index([category])
+  @@index([observationType])
+  @@index([severity])
+}
+
+model Investigation {
+  id        String  @id @default(cuid())
+  companyId String
+  company   Company @relation(fields: [companyId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  ticketId String @unique
+  ticket   Ticket @relation(fields: [ticketId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  investigatorId String
+  investigator   User   @relation("InvestigationInvestigatorRelation", fields: [investigatorId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  summary   String?
+  findings  String?
+  rcaMethod String?
+
+  status InvestigationStatus @default(OPEN)
+
+  actions Action[]
+
+  createdById String
+  createdBy   User    @relation("CreatedByInvestigation", fields: [createdById], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  updatedById String?
+  updatedBy   User?   @relation("UpdatedByInvestigation", fields: [updatedById], references: [id], onDelete: SetNull, onUpdate: Cascade)
+
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  archivedAt DateTime?
+
+  inboxInvestigation InboxInvestigation?
+
+  @@index([companyId])
+  @@index([investigatorId])
+  @@index([status])
+  @@index([createdAt])
+  @@index([archivedAt])
+}
+
+model Action {
+  id        String  @id @default(cuid())
+  companyId String
+  company   Company @relation(fields: [companyId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  investigationId String
+  investigation   Investigation @relation(fields: [investigationId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  title              String
+  description        String?
+  dueDate            DateTime?
+  acceptanceCriteria String?
+
+  ownerId String
+  owner   User   @relation("ActionOwnerRelation", fields: [ownerId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  verifierId String
+  verifier   User   @relation("ActionVerifierRelation", fields: [verifierId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  status     ActionStatus @default(OPEN)
+  verifiedAt DateTime?
+
+  createdById String
+  createdBy   User    @relation("CreatedByAction", fields: [createdById], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  updatedById String?
+  updatedBy   User?   @relation("UpdatedByAction", fields: [updatedById], references: [id], onDelete: SetNull, onUpdate: Cascade)
+
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  archivedAt DateTime?
+
+  inboxAction InboxAction?
+
+  @@index([companyId])
+  @@index([investigationId])
+  @@index([ownerId])
+  @@index([verifierId])
+  @@index([status])
+  @@index([createdAt])
+  @@index([archivedAt])
+}
+
+model InboxTicket {
+  id         String    @id @default(cuid())
+  ticketId   String    @unique
+  ticket     Ticket    @relation(fields: [ticketId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  isNew      Boolean   @default(true)
+  archivedAt DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  @@index([isNew])
+  @@index([createdAt])
+}
+
+model InboxInvestigation {
+  id              String        @id @default(cuid())
+  investigationId String        @unique
+  investigation   Investigation @relation(fields: [investigationId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  isNew           Boolean       @default(true)
+  archivedAt      DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([isNew])
+  @@index([createdAt])
+}
+
+model InboxAction {
+  id         String    @id @default(cuid())
+  actionId   String    @unique
+  action     Action    @relation(fields: [actionId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  isNew      Boolean   @default(true)
+  archivedAt DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  @@index([isNew])
+  @@index([createdAt])
 }

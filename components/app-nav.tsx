@@ -1,20 +1,19 @@
 "use client"
 
-import React from "react"
+import { cn } from "@/lib/utils"
+import { signOut } from "next-auth/react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { signOut } from "next-auth/react"
-import { cn } from "@/lib/utils"
 
+import { ThemeToggle } from "@/components/theme-toggle"
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { ThemeToggle } from "@/components/theme-toggle"
 
 import {
-  LayoutDashboard,
-  Users,
   Building,
+  LayoutDashboard,
   LogOut,
+  Users,
 } from "lucide-react"
 
 export function AppNav({
@@ -29,6 +28,7 @@ export function AppNav({
   const pathname = usePathname()
 
   const navItems = [
+    { label: "Workspace", href: "/workspace", icon: Building, roles: ["ADMIN", "APPROVER", "USER"] },
     { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard, roles: ["ADMIN", "APPROVER", "USER"] },
     { label: "Users", href: "/admin/users", icon: Users, roles: ["ADMIN"] },
     { label: "Companies", href: "/admin/companies", icon: Building, roles: ["ADMIN"] },

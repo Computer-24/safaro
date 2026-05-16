@@ -16,3 +16,79 @@ export const Role = {
 } as const
 
 export type Role = (typeof Role)[keyof typeof Role]
+
+
+export const ItemType = {
+  TICKET: 'TICKET',
+  INVESTIGATION: 'INVESTIGATION',
+  ACTION: 'ACTION'
+} as const
+
+export type ItemType = (typeof ItemType)[keyof typeof ItemType]
+
+
+export const Severity = {
+  NONE: 'NONE',
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH',
+  CRITICAL: 'CRITICAL'
+} as const
+
+export type Severity = (typeof Severity)[keyof typeof Severity]
+
+
+export const TicketStatus = {
+  PENDING_REVIEW: 'PENDING_REVIEW',
+  INVESTIGATION: 'INVESTIGATION',
+  IMPLEMENTATION: 'IMPLEMENTATION',
+  VERIFICATION: 'VERIFICATION',
+  CLOSED: 'CLOSED'
+} as const
+
+export type TicketStatus = (typeof TicketStatus)[keyof typeof TicketStatus]
+
+
+export const InvestigationStatus = {
+  OPEN: 'OPEN',
+  RESOLVED: 'RESOLVED',
+  CLOSED: 'CLOSED'
+} as const
+
+export type InvestigationStatus = (typeof InvestigationStatus)[keyof typeof InvestigationStatus]
+
+
+export const ActionStatus = {
+  OPEN: 'OPEN',
+  COMPLETED: 'COMPLETED',
+  VERIFIED: 'VERIFIED'
+} as const
+
+export type ActionStatus = (typeof ActionStatus)[keyof typeof ActionStatus]
+
+
+export const ObservationType = {
+  POSITIVE: 'POSITIVE',
+  NEGATIVE: 'NEGATIVE'
+} as const
+
+export type ObservationType = (typeof ObservationType)[keyof typeof ObservationType]
+
+
+export const TicketCategory = {
+  BEHAVIOR: 'BEHAVIOR',
+  CONDITION: 'CONDITION',
+  NEAR_MISS: 'NEAR_MISS',
+  EQUIPMENT: 'EQUIPMENT',
+  PPE: 'PPE',
+  HOUSEKEEPING: 'HOUSEKEEPING',
+  ERGONOMICS: 'ERGONOMICS',
+  CHEMICAL: 'CHEMICAL',
+  FIRE_SAFETY: 'FIRE_SAFETY',
+  ELECTRICAL: 'ELECTRICAL',
+  ENVIRONMENT: 'ENVIRONMENT',
+  SECURITY: 'SECURITY',
+  OTHER: 'OTHER'
+} as const
+
+export type TicketCategory = (typeof TicketCategory)[keyof typeof TicketCategory]

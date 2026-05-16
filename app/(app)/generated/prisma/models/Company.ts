@@ -175,6 +175,9 @@ export type CompanyWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Company"> | Date | string
   isActive?: Prisma.BoolFilter<"Company"> | boolean
   users?: Prisma.UserListRelationFilter
+  tickets?: Prisma.TicketListRelationFilter
+  investigations?: Prisma.InvestigationListRelationFilter
+  actions?: Prisma.ActionListRelationFilter
 }
 
 export type CompanyOrderByWithRelationInput = {
@@ -183,6 +186,9 @@ export type CompanyOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   users?: Prisma.UserOrderByRelationAggregateInput
+  tickets?: Prisma.TicketOrderByRelationAggregateInput
+  investigations?: Prisma.InvestigationOrderByRelationAggregateInput
+  actions?: Prisma.ActionOrderByRelationAggregateInput
 }
 
 export type CompanyWhereUniqueInput = Prisma.AtLeast<{
@@ -194,6 +200,9 @@ export type CompanyWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Company"> | Date | string
   isActive?: Prisma.BoolFilter<"Company"> | boolean
   users?: Prisma.UserListRelationFilter
+  tickets?: Prisma.TicketListRelationFilter
+  investigations?: Prisma.InvestigationListRelationFilter
+  actions?: Prisma.ActionListRelationFilter
 }, "id" | "name">
 
 export type CompanyOrderByWithAggregationInput = {
@@ -222,6 +231,9 @@ export type CompanyCreateInput = {
   createdAt?: Date | string
   isActive?: boolean
   users?: Prisma.UserCreateNestedManyWithoutCompanyInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutCompanyInput
+  investigations?: Prisma.InvestigationCreateNestedManyWithoutCompanyInput
+  actions?: Prisma.ActionCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateInput = {
@@ -230,6 +242,9 @@ export type CompanyUncheckedCreateInput = {
   createdAt?: Date | string
   isActive?: boolean
   users?: Prisma.UserUncheckedCreateNestedManyWithoutCompanyInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCompanyInput
+  investigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutCompanyInput
+  actions?: Prisma.ActionUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUpdateInput = {
@@ -238,6 +253,9 @@ export type CompanyUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   users?: Prisma.UserUpdateManyWithoutCompanyNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutCompanyNestedInput
+  investigations?: Prisma.InvestigationUpdateManyWithoutCompanyNestedInput
+  actions?: Prisma.ActionUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateInput = {
@@ -246,6 +264,9 @@ export type CompanyUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   users?: Prisma.UserUncheckedUpdateManyWithoutCompanyNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCompanyNestedInput
+  investigations?: Prisma.InvestigationUncheckedUpdateManyWithoutCompanyNestedInput
+  actions?: Prisma.ActionUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyCreateManyInput = {
@@ -309,11 +330,56 @@ export type CompanyUpdateOneRequiredWithoutUsersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutUsersInput, Prisma.CompanyUpdateWithoutUsersInput>, Prisma.CompanyUncheckedUpdateWithoutUsersInput>
 }
 
+export type CompanyCreateNestedOneWithoutTicketsInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutTicketsInput, Prisma.CompanyUncheckedCreateWithoutTicketsInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutTicketsInput
+  connect?: Prisma.CompanyWhereUniqueInput
+}
+
+export type CompanyUpdateOneRequiredWithoutTicketsNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutTicketsInput, Prisma.CompanyUncheckedCreateWithoutTicketsInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutTicketsInput
+  upsert?: Prisma.CompanyUpsertWithoutTicketsInput
+  connect?: Prisma.CompanyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutTicketsInput, Prisma.CompanyUpdateWithoutTicketsInput>, Prisma.CompanyUncheckedUpdateWithoutTicketsInput>
+}
+
+export type CompanyCreateNestedOneWithoutInvestigationsInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutInvestigationsInput, Prisma.CompanyUncheckedCreateWithoutInvestigationsInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutInvestigationsInput
+  connect?: Prisma.CompanyWhereUniqueInput
+}
+
+export type CompanyUpdateOneRequiredWithoutInvestigationsNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutInvestigationsInput, Prisma.CompanyUncheckedCreateWithoutInvestigationsInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutInvestigationsInput
+  upsert?: Prisma.CompanyUpsertWithoutInvestigationsInput
+  connect?: Prisma.CompanyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutInvestigationsInput, Prisma.CompanyUpdateWithoutInvestigationsInput>, Prisma.CompanyUncheckedUpdateWithoutInvestigationsInput>
+}
+
+export type CompanyCreateNestedOneWithoutActionsInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutActionsInput, Prisma.CompanyUncheckedCreateWithoutActionsInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutActionsInput
+  connect?: Prisma.CompanyWhereUniqueInput
+}
+
+export type CompanyUpdateOneRequiredWithoutActionsNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutActionsInput, Prisma.CompanyUncheckedCreateWithoutActionsInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutActionsInput
+  upsert?: Prisma.CompanyUpsertWithoutActionsInput
+  connect?: Prisma.CompanyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutActionsInput, Prisma.CompanyUpdateWithoutActionsInput>, Prisma.CompanyUncheckedUpdateWithoutActionsInput>
+}
+
 export type CompanyCreateWithoutUsersInput = {
   id?: string
   name: string
   createdAt?: Date | string
   isActive?: boolean
+  tickets?: Prisma.TicketCreateNestedManyWithoutCompanyInput
+  investigations?: Prisma.InvestigationCreateNestedManyWithoutCompanyInput
+  actions?: Prisma.ActionCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateWithoutUsersInput = {
@@ -321,6 +387,9 @@ export type CompanyUncheckedCreateWithoutUsersInput = {
   name: string
   createdAt?: Date | string
   isActive?: boolean
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCompanyInput
+  investigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutCompanyInput
+  actions?: Prisma.ActionUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyCreateOrConnectWithoutUsersInput = {
@@ -344,6 +413,9 @@ export type CompanyUpdateWithoutUsersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tickets?: Prisma.TicketUpdateManyWithoutCompanyNestedInput
+  investigations?: Prisma.InvestigationUpdateManyWithoutCompanyNestedInput
+  actions?: Prisma.ActionUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateWithoutUsersInput = {
@@ -351,6 +423,177 @@ export type CompanyUncheckedUpdateWithoutUsersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCompanyNestedInput
+  investigations?: Prisma.InvestigationUncheckedUpdateManyWithoutCompanyNestedInput
+  actions?: Prisma.ActionUncheckedUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyCreateWithoutTicketsInput = {
+  id?: string
+  name: string
+  createdAt?: Date | string
+  isActive?: boolean
+  users?: Prisma.UserCreateNestedManyWithoutCompanyInput
+  investigations?: Prisma.InvestigationCreateNestedManyWithoutCompanyInput
+  actions?: Prisma.ActionCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyUncheckedCreateWithoutTicketsInput = {
+  id?: string
+  name: string
+  createdAt?: Date | string
+  isActive?: boolean
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutCompanyInput
+  investigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutCompanyInput
+  actions?: Prisma.ActionUncheckedCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyCreateOrConnectWithoutTicketsInput = {
+  where: Prisma.CompanyWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutTicketsInput, Prisma.CompanyUncheckedCreateWithoutTicketsInput>
+}
+
+export type CompanyUpsertWithoutTicketsInput = {
+  update: Prisma.XOR<Prisma.CompanyUpdateWithoutTicketsInput, Prisma.CompanyUncheckedUpdateWithoutTicketsInput>
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutTicketsInput, Prisma.CompanyUncheckedCreateWithoutTicketsInput>
+  where?: Prisma.CompanyWhereInput
+}
+
+export type CompanyUpdateToOneWithWhereWithoutTicketsInput = {
+  where?: Prisma.CompanyWhereInput
+  data: Prisma.XOR<Prisma.CompanyUpdateWithoutTicketsInput, Prisma.CompanyUncheckedUpdateWithoutTicketsInput>
+}
+
+export type CompanyUpdateWithoutTicketsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  users?: Prisma.UserUpdateManyWithoutCompanyNestedInput
+  investigations?: Prisma.InvestigationUpdateManyWithoutCompanyNestedInput
+  actions?: Prisma.ActionUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyUncheckedUpdateWithoutTicketsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  users?: Prisma.UserUncheckedUpdateManyWithoutCompanyNestedInput
+  investigations?: Prisma.InvestigationUncheckedUpdateManyWithoutCompanyNestedInput
+  actions?: Prisma.ActionUncheckedUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyCreateWithoutInvestigationsInput = {
+  id?: string
+  name: string
+  createdAt?: Date | string
+  isActive?: boolean
+  users?: Prisma.UserCreateNestedManyWithoutCompanyInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutCompanyInput
+  actions?: Prisma.ActionCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyUncheckedCreateWithoutInvestigationsInput = {
+  id?: string
+  name: string
+  createdAt?: Date | string
+  isActive?: boolean
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutCompanyInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCompanyInput
+  actions?: Prisma.ActionUncheckedCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyCreateOrConnectWithoutInvestigationsInput = {
+  where: Prisma.CompanyWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutInvestigationsInput, Prisma.CompanyUncheckedCreateWithoutInvestigationsInput>
+}
+
+export type CompanyUpsertWithoutInvestigationsInput = {
+  update: Prisma.XOR<Prisma.CompanyUpdateWithoutInvestigationsInput, Prisma.CompanyUncheckedUpdateWithoutInvestigationsInput>
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutInvestigationsInput, Prisma.CompanyUncheckedCreateWithoutInvestigationsInput>
+  where?: Prisma.CompanyWhereInput
+}
+
+export type CompanyUpdateToOneWithWhereWithoutInvestigationsInput = {
+  where?: Prisma.CompanyWhereInput
+  data: Prisma.XOR<Prisma.CompanyUpdateWithoutInvestigationsInput, Prisma.CompanyUncheckedUpdateWithoutInvestigationsInput>
+}
+
+export type CompanyUpdateWithoutInvestigationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  users?: Prisma.UserUpdateManyWithoutCompanyNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutCompanyNestedInput
+  actions?: Prisma.ActionUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyUncheckedUpdateWithoutInvestigationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  users?: Prisma.UserUncheckedUpdateManyWithoutCompanyNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCompanyNestedInput
+  actions?: Prisma.ActionUncheckedUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyCreateWithoutActionsInput = {
+  id?: string
+  name: string
+  createdAt?: Date | string
+  isActive?: boolean
+  users?: Prisma.UserCreateNestedManyWithoutCompanyInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutCompanyInput
+  investigations?: Prisma.InvestigationCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyUncheckedCreateWithoutActionsInput = {
+  id?: string
+  name: string
+  createdAt?: Date | string
+  isActive?: boolean
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutCompanyInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCompanyInput
+  investigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyCreateOrConnectWithoutActionsInput = {
+  where: Prisma.CompanyWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutActionsInput, Prisma.CompanyUncheckedCreateWithoutActionsInput>
+}
+
+export type CompanyUpsertWithoutActionsInput = {
+  update: Prisma.XOR<Prisma.CompanyUpdateWithoutActionsInput, Prisma.CompanyUncheckedUpdateWithoutActionsInput>
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutActionsInput, Prisma.CompanyUncheckedCreateWithoutActionsInput>
+  where?: Prisma.CompanyWhereInput
+}
+
+export type CompanyUpdateToOneWithWhereWithoutActionsInput = {
+  where?: Prisma.CompanyWhereInput
+  data: Prisma.XOR<Prisma.CompanyUpdateWithoutActionsInput, Prisma.CompanyUncheckedUpdateWithoutActionsInput>
+}
+
+export type CompanyUpdateWithoutActionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  users?: Prisma.UserUpdateManyWithoutCompanyNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutCompanyNestedInput
+  investigations?: Prisma.InvestigationUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyUncheckedUpdateWithoutActionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  users?: Prisma.UserUncheckedUpdateManyWithoutCompanyNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCompanyNestedInput
+  investigations?: Prisma.InvestigationUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 
@@ -360,10 +603,16 @@ export type CompanyUncheckedUpdateWithoutUsersInput = {
 
 export type CompanyCountOutputType = {
   users: number
+  tickets: number
+  investigations: number
+  actions: number
 }
 
 export type CompanyCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | CompanyCountOutputTypeCountUsersArgs
+  tickets?: boolean | CompanyCountOutputTypeCountTicketsArgs
+  investigations?: boolean | CompanyCountOutputTypeCountInvestigationsArgs
+  actions?: boolean | CompanyCountOutputTypeCountActionsArgs
 }
 
 /**
@@ -383,6 +632,27 @@ export type CompanyCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.UserWhereInput
 }
 
+/**
+ * CompanyCountOutputType without action
+ */
+export type CompanyCountOutputTypeCountTicketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TicketWhereInput
+}
+
+/**
+ * CompanyCountOutputType without action
+ */
+export type CompanyCountOutputTypeCountInvestigationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InvestigationWhereInput
+}
+
+/**
+ * CompanyCountOutputType without action
+ */
+export type CompanyCountOutputTypeCountActionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ActionWhereInput
+}
+
 
 export type CompanySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -390,6 +660,9 @@ export type CompanySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   createdAt?: boolean
   isActive?: boolean
   users?: boolean | Prisma.Company$usersArgs<ExtArgs>
+  tickets?: boolean | Prisma.Company$ticketsArgs<ExtArgs>
+  investigations?: boolean | Prisma.Company$investigationsArgs<ExtArgs>
+  actions?: boolean | Prisma.Company$actionsArgs<ExtArgs>
   _count?: boolean | Prisma.CompanyCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["company"]>
 
@@ -417,6 +690,9 @@ export type CompanySelectScalar = {
 export type CompanyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "createdAt" | "isActive", ExtArgs["result"]["company"]>
 export type CompanyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | Prisma.Company$usersArgs<ExtArgs>
+  tickets?: boolean | Prisma.Company$ticketsArgs<ExtArgs>
+  investigations?: boolean | Prisma.Company$investigationsArgs<ExtArgs>
+  actions?: boolean | Prisma.Company$actionsArgs<ExtArgs>
   _count?: boolean | Prisma.CompanyCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CompanyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -426,6 +702,9 @@ export type $CompanyPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "Company"
   objects: {
     users: Prisma.$UserPayload<ExtArgs>[]
+    tickets: Prisma.$TicketPayload<ExtArgs>[]
+    investigations: Prisma.$InvestigationPayload<ExtArgs>[]
+    actions: Prisma.$ActionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -827,6 +1106,9 @@ readonly fields: CompanyFieldRefs;
 export interface Prisma__CompanyClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   users<T extends Prisma.Company$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tickets<T extends Prisma.Company$ticketsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$ticketsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  investigations<T extends Prisma.Company$investigationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$investigationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvestigationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  actions<T extends Prisma.Company$actionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$actionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1274,6 +1556,78 @@ export type Company$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
+}
+
+/**
+ * Company.tickets
+ */
+export type Company$ticketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Ticket
+   */
+  select?: Prisma.TicketSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Ticket
+   */
+  omit?: Prisma.TicketOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TicketInclude<ExtArgs> | null
+  where?: Prisma.TicketWhereInput
+  orderBy?: Prisma.TicketOrderByWithRelationInput | Prisma.TicketOrderByWithRelationInput[]
+  cursor?: Prisma.TicketWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TicketScalarFieldEnum | Prisma.TicketScalarFieldEnum[]
+}
+
+/**
+ * Company.investigations
+ */
+export type Company$investigationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Investigation
+   */
+  select?: Prisma.InvestigationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Investigation
+   */
+  omit?: Prisma.InvestigationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InvestigationInclude<ExtArgs> | null
+  where?: Prisma.InvestigationWhereInput
+  orderBy?: Prisma.InvestigationOrderByWithRelationInput | Prisma.InvestigationOrderByWithRelationInput[]
+  cursor?: Prisma.InvestigationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InvestigationScalarFieldEnum | Prisma.InvestigationScalarFieldEnum[]
+}
+
+/**
+ * Company.actions
+ */
+export type Company$actionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Action
+   */
+  select?: Prisma.ActionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Action
+   */
+  omit?: Prisma.ActionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ActionInclude<ExtArgs> | null
+  where?: Prisma.ActionWhereInput
+  orderBy?: Prisma.ActionOrderByWithRelationInput | Prisma.ActionOrderByWithRelationInput[]
+  cursor?: Prisma.ActionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ActionScalarFieldEnum | Prisma.ActionScalarFieldEnum[]
 }
 
 /**

@@ -10,4 +10,10 @@
  */
 export type * from './models/User'
 export type * from './models/Company'
+export type * from './models/Ticket'
+export type * from './models/Investigation'
+export type * from './models/Action'
+export type * from './models/InboxTicket'
+export type * from './models/InboxInvestigation'
+export type * from './models/InboxAction'
 export type * from './commonInputTypes'

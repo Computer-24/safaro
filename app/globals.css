@@ -8,6 +8,10 @@ body {
   font-family: var(--font-sans);
 }
 
+html, body, #__next {
+  height: 100%;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

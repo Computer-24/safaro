@@ -27,3 +27,33 @@ export type User = Prisma.UserModel
  * 
  */
 export type Company = Prisma.CompanyModel
+/**
+ * Model Ticket
+ * 
+ */
+export type Ticket = Prisma.TicketModel
+/**
+ * Model Investigation
+ * 
+ */
+export type Investigation = Prisma.InvestigationModel
+/**
+ * Model Action
+ * 
+ */
+export type Action = Prisma.ActionModel
+/**
+ * Model InboxTicket
+ * 
+ */
+export type InboxTicket = Prisma.InboxTicketModel
+/**
+ * Model InboxInvestigation
+ * 
+ */
+export type InboxInvestigation = Prisma.InboxInvestigationModel
+/**
+ * Model InboxAction
+ * 
+ */
+export type InboxAction = Prisma.InboxActionModel

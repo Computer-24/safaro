@@ -46,13 +46,10 @@ export default function UsersTable({ companyId, apiUrl }: Props) {
         url.searchParams.set("sortDir", sort[0].desc ? "desc" : "asc");
       }
 
-      console.log("fetching users:", url.toString()); // temporary debug
-
       const res = await fetch(url.toString(), { signal });
 
       if (!res.ok) {
         const text = await res.text();
-        console.error("Users API error response:", text);
         try {
           const errJson = JSON.parse(text);
           throw new Error(errJson.message || "Failed to load users");
@@ -85,7 +82,6 @@ export default function UsersTable({ companyId, apiUrl }: Props) {
       }
     } catch (err: any) {
       if (err.name === "AbortError") return;
-      console.error(err);
       setError(err.message || "Error");
       setRows([]);
       setTotal(0);

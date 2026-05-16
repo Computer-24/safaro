@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import {
     Dialog,
     DialogContent,
+    DialogDescription,
     DialogFooter,
     DialogHeader,
     DialogTitle,
@@ -163,146 +164,152 @@ export default function CreateUserModal({ companies, approvers, triggerLabel = "
         }
     }
 
-    return (
-        <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger asChild>
-                <Button
-                    size="lg"
-                    className="bg-primary text-primary-foreground hover:opacity-90"
-                    onClick={() => setOpen(true)}
-                >
-                    {triggerLabel}
-                </Button>
-            </DialogTrigger>
+return (
+  <Dialog open={open} onOpenChange={setOpen}>
+    <DialogTrigger asChild>
+      <Button
+        size="lg"
+        className="bg-primary text-primary-foreground hover:opacity-90"
+        onClick={() => setOpen(true)}
+      >
+        {triggerLabel}
+      </Button>
+    </DialogTrigger>
 
-            <DialogContent className="sm:max-w-lg">
-                <DialogHeader>
-                    <DialogTitle>Create user</DialogTitle>
-                </DialogHeader>
+    <DialogContent className="sm:max-w-lg">
+      <DialogHeader>
+        <DialogTitle>Create user</DialogTitle>
+      </DialogHeader>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="mt-4 space-y-4" noValidate>
-                    <div className="space-y-2">
-                        <Label>Name</Label>
-                        <Input
-                            {...register("name", { required: "Name is required", validate: (v) => !!v.trim() || "Name is required" })}
-                            className={fieldClass}
-                        />
-                        {formState.errors.name && <p className={errorText}>{formState.errors.name.message}</p>}
-                    </div>
+      {/* Accessibility: DialogDescription must be a direct child of DialogContent */}
+      <DialogDescription className="mb-2 text-sm text-muted-foreground">
+        Create a new user. Password, role and company are required.
+      </DialogDescription>
 
-                    <div className="space-y-2">
-                        <Label>Email</Label>
-                        <Input
-                            {...register("email", {
-                                required: "Email is required",
-                                validate: (v) => !!v.trim() || "Email is required",
-                            })}
-                            className={fieldClass}
-                        />
-                        {formState.errors.email && <p className={errorText}>{formState.errors.email.message}</p>}
-                    </div>
+      <form onSubmit={handleSubmit(onSubmit)} className="mt-4 space-y-4" noValidate>
+        <div className="space-y-2">
+          <Label>Name</Label>
+          <Input
+            {...register("name", { required: "Name is required", validate: (v) => !!v.trim() || "Name is required" })}
+            className={fieldClass}
+          />
+          {formState.errors.name && <p className={errorText}>{formState.errors.name.message}</p>}
+        </div>
 
-                    <div className="space-y-2">
-                        <Label>Password</Label>
-                        <Input
-                            type="password"
-                            {...register("password", {
-                                required: "Password is required",
-                                validate: (v) => !!v.trim() || "Password is required",
-                            })}
-                            className={fieldClass}
-                        />
-                        {formState.errors.password && <p className={errorText}>{formState.errors.password.message}</p>}
-                    </div>
+        <div className="space-y-2">
+          <Label>Email</Label>
+          <Input
+            {...register("email", {
+              required: "Email is required",
+              validate: (v) => !!v.trim() || "Email is required",
+            })}
+            className={fieldClass}
+          />
+          {formState.errors.email && <p className={errorText}>{formState.errors.email.message}</p>}
+        </div>
 
-                    <div className="space-y-2">
-                        <Label>Company</Label>
-                        <Select
-                            defaultValue={NONE_VALUE}
-                            onValueChange={(v) => {
-                                setValue("companyId", v as any);
-                                if (v !== NONE_VALUE) clearErrors("companyId" as any);
-                            }}
-                        >
-                            <SelectTrigger className={fieldClass}>
-                                <SelectValue placeholder="Select company" />
-                            </SelectTrigger>
-                            <SelectContent className="z-50">
-                                <SelectItem value={NONE_VALUE}>Select company</SelectItem>
-                                {companies.map((c) => (
-                                    <SelectItem key={c.id} value={c.id}>
-                                        {c.name}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-                        {formState.errors.companyId && <p className={errorText}>{(formState.errors.companyId as any)?.message}</p>}
-                    </div>
+        <div className="space-y-2">
+          <Label>Password</Label>
+          <Input
+            type="password"
+            {...register("password", {
+              required: "Password is required",
+              validate: (v) => !!v.trim() || "Password is required",
+            })}
+            className={fieldClass}
+          />
+          {formState.errors.password && <p className={errorText}>{formState.errors.password.message}</p>}
+        </div>
 
-                    <div className="space-y-2">
-                        <Label>Role</Label>
-                        <Select
-                            defaultValue="USER"
-                            onValueChange={(v) => {
-                                setValue("role", v as any);
-                                if (v) clearErrors("role" as any);
-                            }}
-                        >
-                            <SelectTrigger className={fieldClass}>
-                                <SelectValue placeholder="Select role" />
-                            </SelectTrigger>
-                            <SelectContent className="z-50">
-                                <SelectItem value="ADMIN">ADMIN</SelectItem>
-                                <SelectItem value="APPROVER">APPROVER</SelectItem>
-                                <SelectItem value="USER">USER</SelectItem>
-                            </SelectContent>
-                        </Select>
-                        {formState.errors.role && <p className={errorText}>{(formState.errors.role as any)?.message}</p>}
-                    </div>
+        <div className="space-y-2">
+          <Label>Company</Label>
+          <Select
+            defaultValue={NONE_VALUE}
+            onValueChange={(v) => {
+              setValue("companyId", v as any);
+              if (v !== NONE_VALUE) clearErrors("companyId" as any);
+            }}
+          >
+            <SelectTrigger className={fieldClass}>
+              <SelectValue placeholder="Select company" />
+            </SelectTrigger>
+            <SelectContent className="z-50">
+              <SelectItem value={NONE_VALUE}>Select company</SelectItem>
+              {companies.map((c) => (
+                <SelectItem key={c.id} value={c.id}>
+                  {c.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          {formState.errors.companyId && <p className={errorText}>{(formState.errors.companyId as any)?.message}</p>}
+        </div>
 
-                    <div className="space-y-2">
-                        <Label>Approver</Label>
-                        <Select defaultValue={NONE_VALUE} onValueChange={(v) => setValue("approverId", v as any)}>
-                            <SelectTrigger className={fieldClass}>
-                                <SelectValue placeholder="Select approver" />
-                            </SelectTrigger>
-                            <SelectContent className="z-50">
-                                <SelectItem value={NONE_VALUE}>No approver</SelectItem>
-                                {approvers.map((a) => (
-                                    <SelectItem key={a.id} value={a.id}>
-                                        {a.name}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-                        {formState.errors.approverId && <p className={errorText}>{(formState.errors.approverId as any)?.message}</p>}
-                    </div>
+        <div className="space-y-2">
+          <Label>Role</Label>
+          <Select
+            defaultValue="USER"
+            onValueChange={(v) => {
+              setValue("role", v as any);
+              if (v) clearErrors("role" as any);
+            }}
+          >
+            <SelectTrigger className={fieldClass}>
+              <SelectValue placeholder="Select role" />
+            </SelectTrigger>
+            <SelectContent className="z-50">
+              <SelectItem value="ADMIN">ADMIN</SelectItem>
+              <SelectItem value="APPROVER">APPROVER</SelectItem>
+              <SelectItem value="USER">USER</SelectItem>
+            </SelectContent>
+          </Select>
+          {formState.errors.role && <p className={errorText}>{(formState.errors.role as any)?.message}</p>}
+        </div>
 
-                    <DialogFooter className="pt-2">
-                        <div className="flex w-full justify-end items-center">
-                            <div className="flex gap-2">
-                                <Button
-                                    type="button"
-                                    variant="ghost"
-                                    onClick={() => {
-                                        setOpen(false);
-                                        reset();
-                                        clearErrors();
-                                    }}
-                                    disabled={isSaving}
-                                >
-                                    Cancel
-                                </Button>
+        <div className="space-y-2">
+          <Label>Approver</Label>
+          <Select defaultValue={NONE_VALUE} onValueChange={(v) => setValue("approverId", v as any)}>
+            <SelectTrigger className={fieldClass}>
+              <SelectValue placeholder="Select approver" />
+            </SelectTrigger>
+            <SelectContent className="z-50">
+              <SelectItem value={NONE_VALUE}>No approver</SelectItem>
+              {approvers.map((a) => (
+                <SelectItem key={a.id} value={a.id}>
+                  {a.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          {formState.errors.approverId && <p className={errorText}>{(formState.errors.approverId as any)?.message}</p>}
+        </div>
 
-                                <Button type="submit" disabled={isSaving}>
-                                    {isSaving ? <Spinner className="mr-2 h-4 w-4 animate-spin" /> : null}
-                                    Create
-                                </Button>
-                            </div>
-                        </div>
-                    </DialogFooter>
-                </form>
-            </DialogContent>
-        </Dialog>
-    );
+        <DialogFooter className="pt-2">
+          <div className="flex w-full justify-end items-center">
+            <div className="flex gap-2">
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={() => {
+                  setOpen(false);
+                  reset();
+                  clearErrors();
+                }}
+                disabled={isSaving}
+              >
+                Cancel
+              </Button>
+
+              <Button type="submit" disabled={isSaving}>
+                {isSaving ? <Spinner className="mr-2 h-4 w-4 animate-spin" /> : null}
+                Create
+              </Button>
+            </div>
+          </div>
+        </DialogFooter>
+      </form>
+    </DialogContent>
+  </Dialog>
+);
+
 }

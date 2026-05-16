@@ -3,6 +3,7 @@
 
 import { CompanyRow } from "@/app/(app)/admin/companies/columns";
 import CompaniesTableUI from "@/app/(app)/admin/companies/CompaniesTableUI";
+import companiesEvents from "@/lib/companiesEvents";
 import { DEFAULT_PAGE_SIZE } from "@/lib/pagination";
 import { useCallback, useEffect, useState } from "react";
 
@@ -63,10 +64,22 @@ export default function CompaniesTable({ apiUrl }: Props) {
     }, [endpoint, page, pageSize, sort]);
 
     useEffect(() => {
+        // initial fetch on mount
         const ac = new AbortController();
         fetchCompanies(ac.signal);
-        return () => ac.abort();
+
+        // listener to re-run fetch when a company is created
+        const onCreated = () => {
+            const eventAc = new AbortController();
+            fetchCompanies(eventAc.signal);
+        };
+        companiesEvents.addEventListener("companies:created", onCreated);
+        return () => {
+            ac.abort();
+            companiesEvents.removeEventListener("companies:created", onCreated);
+        };
     }, [fetchCompanies, sort]);
+
 
     const handlePageChange = (newPageIndex0Based: number) => setPage(newPageIndex0Based + 1);
     const handlePageSizeChange = (newSize: number) => { setPageSize(newSize); setPage(1); };

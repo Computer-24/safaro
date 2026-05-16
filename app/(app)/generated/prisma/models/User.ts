@@ -217,6 +217,19 @@ export type UserWhereInput = {
   company?: Prisma.XOR<Prisma.CompanyScalarRelationFilter, Prisma.CompanyWhereInput>
   approver?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   delegates?: Prisma.UserListRelationFilter
+  ticketsReported?: Prisma.TicketListRelationFilter
+  ticketsApproved?: Prisma.TicketListRelationFilter
+  ticketsInvestigated?: Prisma.TicketListRelationFilter
+  investigationsAssigned?: Prisma.InvestigationListRelationFilter
+  actionsOwned?: Prisma.ActionListRelationFilter
+  actionsVerified?: Prisma.ActionListRelationFilter
+  archivedTickets?: Prisma.TicketListRelationFilter
+  createdTickets?: Prisma.TicketListRelationFilter
+  updatedTickets?: Prisma.TicketListRelationFilter
+  createdInvestigations?: Prisma.InvestigationListRelationFilter
+  updatedInvestigations?: Prisma.InvestigationListRelationFilter
+  createdActions?: Prisma.ActionListRelationFilter
+  updatedActions?: Prisma.ActionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -232,6 +245,19 @@ export type UserOrderByWithRelationInput = {
   company?: Prisma.CompanyOrderByWithRelationInput
   approver?: Prisma.UserOrderByWithRelationInput
   delegates?: Prisma.UserOrderByRelationAggregateInput
+  ticketsReported?: Prisma.TicketOrderByRelationAggregateInput
+  ticketsApproved?: Prisma.TicketOrderByRelationAggregateInput
+  ticketsInvestigated?: Prisma.TicketOrderByRelationAggregateInput
+  investigationsAssigned?: Prisma.InvestigationOrderByRelationAggregateInput
+  actionsOwned?: Prisma.ActionOrderByRelationAggregateInput
+  actionsVerified?: Prisma.ActionOrderByRelationAggregateInput
+  archivedTickets?: Prisma.TicketOrderByRelationAggregateInput
+  createdTickets?: Prisma.TicketOrderByRelationAggregateInput
+  updatedTickets?: Prisma.TicketOrderByRelationAggregateInput
+  createdInvestigations?: Prisma.InvestigationOrderByRelationAggregateInput
+  updatedInvestigations?: Prisma.InvestigationOrderByRelationAggregateInput
+  createdActions?: Prisma.ActionOrderByRelationAggregateInput
+  updatedActions?: Prisma.ActionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -250,6 +276,19 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   company?: Prisma.XOR<Prisma.CompanyScalarRelationFilter, Prisma.CompanyWhereInput>
   approver?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   delegates?: Prisma.UserListRelationFilter
+  ticketsReported?: Prisma.TicketListRelationFilter
+  ticketsApproved?: Prisma.TicketListRelationFilter
+  ticketsInvestigated?: Prisma.TicketListRelationFilter
+  investigationsAssigned?: Prisma.InvestigationListRelationFilter
+  actionsOwned?: Prisma.ActionListRelationFilter
+  actionsVerified?: Prisma.ActionListRelationFilter
+  archivedTickets?: Prisma.TicketListRelationFilter
+  createdTickets?: Prisma.TicketListRelationFilter
+  updatedTickets?: Prisma.TicketListRelationFilter
+  createdInvestigations?: Prisma.InvestigationListRelationFilter
+  updatedInvestigations?: Prisma.InvestigationListRelationFilter
+  createdActions?: Prisma.ActionListRelationFilter
+  updatedActions?: Prisma.ActionListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -293,6 +332,19 @@ export type UserCreateInput = {
   company: Prisma.CompanyCreateNestedOneWithoutUsersInput
   approver?: Prisma.UserCreateNestedOneWithoutDelegatesInput
   delegates?: Prisma.UserCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -306,6 +358,19 @@ export type UserUncheckedCreateInput = {
   createdAt?: Date | string
   isActive?: boolean
   delegates?: Prisma.UserUncheckedCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketUncheckedCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketUncheckedCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketUncheckedCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionUncheckedCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionUncheckedCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUpdateInput = {
@@ -319,6 +384,19 @@ export type UserUpdateInput = {
   company?: Prisma.CompanyUpdateOneRequiredWithoutUsersNestedInput
   approver?: Prisma.UserUpdateOneWithoutDelegatesNestedInput
   delegates?: Prisma.UserUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -332,6 +410,19 @@ export type UserUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   delegates?: Prisma.UserUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUncheckedUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUncheckedUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUncheckedUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUncheckedUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUncheckedUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -417,6 +508,11 @@ export type UserMinOrderByAggregateInput = {
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+}
+
+export type UserScalarRelationFilter = {
+  is?: Prisma.UserWhereInput
+  isNot?: Prisma.UserWhereInput
 }
 
 export type UserCreateNestedOneWithoutDelegatesInput = {
@@ -539,6 +635,198 @@ export type UserUncheckedUpdateManyWithoutCompanyNestedInput = {
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
+export type UserCreateNestedOneWithoutTicketsReportedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTicketsReportedInput, Prisma.UserUncheckedCreateWithoutTicketsReportedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTicketsReportedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutTicketsApprovedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTicketsApprovedInput, Prisma.UserUncheckedCreateWithoutTicketsApprovedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTicketsApprovedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutTicketsInvestigatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTicketsInvestigatedInput, Prisma.UserUncheckedCreateWithoutTicketsInvestigatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTicketsInvestigatedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutCreatedTicketsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedTicketsInput, Prisma.UserUncheckedCreateWithoutCreatedTicketsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedTicketsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutUpdatedTicketsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedTicketsInput, Prisma.UserUncheckedCreateWithoutUpdatedTicketsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedTicketsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutArchivedTicketsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutArchivedTicketsInput, Prisma.UserUncheckedCreateWithoutArchivedTicketsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutArchivedTicketsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutTicketsReportedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTicketsReportedInput, Prisma.UserUncheckedCreateWithoutTicketsReportedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTicketsReportedInput
+  upsert?: Prisma.UserUpsertWithoutTicketsReportedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTicketsReportedInput, Prisma.UserUpdateWithoutTicketsReportedInput>, Prisma.UserUncheckedUpdateWithoutTicketsReportedInput>
+}
+
+export type UserUpdateOneRequiredWithoutTicketsApprovedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTicketsApprovedInput, Prisma.UserUncheckedCreateWithoutTicketsApprovedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTicketsApprovedInput
+  upsert?: Prisma.UserUpsertWithoutTicketsApprovedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTicketsApprovedInput, Prisma.UserUpdateWithoutTicketsApprovedInput>, Prisma.UserUncheckedUpdateWithoutTicketsApprovedInput>
+}
+
+export type UserUpdateOneWithoutTicketsInvestigatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTicketsInvestigatedInput, Prisma.UserUncheckedCreateWithoutTicketsInvestigatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTicketsInvestigatedInput
+  upsert?: Prisma.UserUpsertWithoutTicketsInvestigatedInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTicketsInvestigatedInput, Prisma.UserUpdateWithoutTicketsInvestigatedInput>, Prisma.UserUncheckedUpdateWithoutTicketsInvestigatedInput>
+}
+
+export type UserUpdateOneRequiredWithoutCreatedTicketsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedTicketsInput, Prisma.UserUncheckedCreateWithoutCreatedTicketsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedTicketsInput
+  upsert?: Prisma.UserUpsertWithoutCreatedTicketsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedTicketsInput, Prisma.UserUpdateWithoutCreatedTicketsInput>, Prisma.UserUncheckedUpdateWithoutCreatedTicketsInput>
+}
+
+export type UserUpdateOneWithoutUpdatedTicketsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedTicketsInput, Prisma.UserUncheckedCreateWithoutUpdatedTicketsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedTicketsInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedTicketsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedTicketsInput, Prisma.UserUpdateWithoutUpdatedTicketsInput>, Prisma.UserUncheckedUpdateWithoutUpdatedTicketsInput>
+}
+
+export type UserUpdateOneWithoutArchivedTicketsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutArchivedTicketsInput, Prisma.UserUncheckedCreateWithoutArchivedTicketsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutArchivedTicketsInput
+  upsert?: Prisma.UserUpsertWithoutArchivedTicketsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutArchivedTicketsInput, Prisma.UserUpdateWithoutArchivedTicketsInput>, Prisma.UserUncheckedUpdateWithoutArchivedTicketsInput>
+}
+
+export type UserCreateNestedOneWithoutInvestigationsAssignedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutInvestigationsAssignedInput, Prisma.UserUncheckedCreateWithoutInvestigationsAssignedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutInvestigationsAssignedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutCreatedInvestigationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedInvestigationsInput, Prisma.UserUncheckedCreateWithoutCreatedInvestigationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedInvestigationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutUpdatedInvestigationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedInvestigationsInput, Prisma.UserUncheckedCreateWithoutUpdatedInvestigationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedInvestigationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutInvestigationsAssignedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutInvestigationsAssignedInput, Prisma.UserUncheckedCreateWithoutInvestigationsAssignedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutInvestigationsAssignedInput
+  upsert?: Prisma.UserUpsertWithoutInvestigationsAssignedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutInvestigationsAssignedInput, Prisma.UserUpdateWithoutInvestigationsAssignedInput>, Prisma.UserUncheckedUpdateWithoutInvestigationsAssignedInput>
+}
+
+export type UserUpdateOneRequiredWithoutCreatedInvestigationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedInvestigationsInput, Prisma.UserUncheckedCreateWithoutCreatedInvestigationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedInvestigationsInput
+  upsert?: Prisma.UserUpsertWithoutCreatedInvestigationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedInvestigationsInput, Prisma.UserUpdateWithoutCreatedInvestigationsInput>, Prisma.UserUncheckedUpdateWithoutCreatedInvestigationsInput>
+}
+
+export type UserUpdateOneWithoutUpdatedInvestigationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedInvestigationsInput, Prisma.UserUncheckedCreateWithoutUpdatedInvestigationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedInvestigationsInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedInvestigationsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedInvestigationsInput, Prisma.UserUpdateWithoutUpdatedInvestigationsInput>, Prisma.UserUncheckedUpdateWithoutUpdatedInvestigationsInput>
+}
+
+export type UserCreateNestedOneWithoutActionsOwnedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutActionsOwnedInput, Prisma.UserUncheckedCreateWithoutActionsOwnedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutActionsOwnedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutActionsVerifiedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutActionsVerifiedInput, Prisma.UserUncheckedCreateWithoutActionsVerifiedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutActionsVerifiedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutCreatedActionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedActionsInput, Prisma.UserUncheckedCreateWithoutCreatedActionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedActionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutUpdatedActionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedActionsInput, Prisma.UserUncheckedCreateWithoutUpdatedActionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedActionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutActionsOwnedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutActionsOwnedInput, Prisma.UserUncheckedCreateWithoutActionsOwnedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutActionsOwnedInput
+  upsert?: Prisma.UserUpsertWithoutActionsOwnedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutActionsOwnedInput, Prisma.UserUpdateWithoutActionsOwnedInput>, Prisma.UserUncheckedUpdateWithoutActionsOwnedInput>
+}
+
+export type UserUpdateOneRequiredWithoutActionsVerifiedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutActionsVerifiedInput, Prisma.UserUncheckedCreateWithoutActionsVerifiedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutActionsVerifiedInput
+  upsert?: Prisma.UserUpsertWithoutActionsVerifiedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutActionsVerifiedInput, Prisma.UserUpdateWithoutActionsVerifiedInput>, Prisma.UserUncheckedUpdateWithoutActionsVerifiedInput>
+}
+
+export type UserUpdateOneRequiredWithoutCreatedActionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedActionsInput, Prisma.UserUncheckedCreateWithoutCreatedActionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedActionsInput
+  upsert?: Prisma.UserUpsertWithoutCreatedActionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedActionsInput, Prisma.UserUpdateWithoutCreatedActionsInput>, Prisma.UserUncheckedUpdateWithoutCreatedActionsInput>
+}
+
+export type UserUpdateOneWithoutUpdatedActionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUpdatedActionsInput, Prisma.UserUncheckedCreateWithoutUpdatedActionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUpdatedActionsInput
+  upsert?: Prisma.UserUpsertWithoutUpdatedActionsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUpdatedActionsInput, Prisma.UserUpdateWithoutUpdatedActionsInput>, Prisma.UserUncheckedUpdateWithoutUpdatedActionsInput>
+}
+
 export type UserCreateWithoutDelegatesInput = {
   id?: string
   name: string
@@ -549,6 +837,19 @@ export type UserCreateWithoutDelegatesInput = {
   isActive?: boolean
   company: Prisma.CompanyCreateNestedOneWithoutUsersInput
   approver?: Prisma.UserCreateNestedOneWithoutDelegatesInput
+  ticketsReported?: Prisma.TicketCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutDelegatesInput = {
@@ -561,6 +862,19 @@ export type UserUncheckedCreateWithoutDelegatesInput = {
   role?: $Enums.Role
   createdAt?: Date | string
   isActive?: boolean
+  ticketsReported?: Prisma.TicketUncheckedCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketUncheckedCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketUncheckedCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionUncheckedCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionUncheckedCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutDelegatesInput = {
@@ -578,6 +892,19 @@ export type UserCreateWithoutApproverInput = {
   isActive?: boolean
   company: Prisma.CompanyCreateNestedOneWithoutUsersInput
   delegates?: Prisma.UserCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutApproverInput = {
@@ -590,6 +917,19 @@ export type UserUncheckedCreateWithoutApproverInput = {
   createdAt?: Date | string
   isActive?: boolean
   delegates?: Prisma.UserUncheckedCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketUncheckedCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketUncheckedCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketUncheckedCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionUncheckedCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionUncheckedCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutApproverInput = {
@@ -623,6 +963,19 @@ export type UserUpdateWithoutDelegatesInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   company?: Prisma.CompanyUpdateOneRequiredWithoutUsersNestedInput
   approver?: Prisma.UserUpdateOneWithoutDelegatesNestedInput
+  ticketsReported?: Prisma.TicketUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDelegatesInput = {
@@ -635,6 +988,19 @@ export type UserUncheckedUpdateWithoutDelegatesInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ticketsReported?: Prisma.TicketUncheckedUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUncheckedUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUncheckedUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUncheckedUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUncheckedUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUpsertWithWhereUniqueWithoutApproverInput = {
@@ -678,6 +1044,19 @@ export type UserCreateWithoutCompanyInput = {
   isActive?: boolean
   approver?: Prisma.UserCreateNestedOneWithoutDelegatesInput
   delegates?: Prisma.UserCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserUncheckedCreateWithoutCompanyInput = {
@@ -690,6 +1069,19 @@ export type UserUncheckedCreateWithoutCompanyInput = {
   createdAt?: Date | string
   isActive?: boolean
   delegates?: Prisma.UserUncheckedCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketUncheckedCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketUncheckedCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketUncheckedCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionUncheckedCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionUncheckedCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionUncheckedCreateNestedManyWithoutUpdatedByInput
 }
 
 export type UserCreateOrConnectWithoutCompanyInput = {
@@ -718,6 +1110,1514 @@ export type UserUpdateManyWithWhereWithoutCompanyInput = {
   data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutCompanyInput>
 }
 
+export type UserCreateWithoutTicketsReportedInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  company: Prisma.CompanyCreateNestedOneWithoutUsersInput
+  approver?: Prisma.UserCreateNestedOneWithoutDelegatesInput
+  delegates?: Prisma.UserCreateNestedManyWithoutApproverInput
+  ticketsApproved?: Prisma.TicketCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutTicketsReportedInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  companyId: string
+  approverId?: string | null
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  delegates?: Prisma.UserUncheckedCreateNestedManyWithoutApproverInput
+  ticketsApproved?: Prisma.TicketUncheckedCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketUncheckedCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionUncheckedCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionUncheckedCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutTicketsReportedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTicketsReportedInput, Prisma.UserUncheckedCreateWithoutTicketsReportedInput>
+}
+
+export type UserCreateWithoutTicketsApprovedInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  company: Prisma.CompanyCreateNestedOneWithoutUsersInput
+  approver?: Prisma.UserCreateNestedOneWithoutDelegatesInput
+  delegates?: Prisma.UserCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketCreateNestedManyWithoutReporterInput
+  ticketsInvestigated?: Prisma.TicketCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutTicketsApprovedInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  companyId: string
+  approverId?: string | null
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  delegates?: Prisma.UserUncheckedCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketUncheckedCreateNestedManyWithoutReporterInput
+  ticketsInvestigated?: Prisma.TicketUncheckedCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionUncheckedCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionUncheckedCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutTicketsApprovedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTicketsApprovedInput, Prisma.UserUncheckedCreateWithoutTicketsApprovedInput>
+}
+
+export type UserCreateWithoutTicketsInvestigatedInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  company: Prisma.CompanyCreateNestedOneWithoutUsersInput
+  approver?: Prisma.UserCreateNestedOneWithoutDelegatesInput
+  delegates?: Prisma.UserCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketCreateNestedManyWithoutApproverInput
+  investigationsAssigned?: Prisma.InvestigationCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutTicketsInvestigatedInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  companyId: string
+  approverId?: string | null
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  delegates?: Prisma.UserUncheckedCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketUncheckedCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketUncheckedCreateNestedManyWithoutApproverInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionUncheckedCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionUncheckedCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutTicketsInvestigatedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTicketsInvestigatedInput, Prisma.UserUncheckedCreateWithoutTicketsInvestigatedInput>
+}
+
+export type UserCreateWithoutCreatedTicketsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  company: Prisma.CompanyCreateNestedOneWithoutUsersInput
+  approver?: Prisma.UserCreateNestedOneWithoutDelegatesInput
+  delegates?: Prisma.UserCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketCreateNestedManyWithoutArchivedByInput
+  updatedTickets?: Prisma.TicketCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutCreatedTicketsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  companyId: string
+  approverId?: string | null
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  delegates?: Prisma.UserUncheckedCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketUncheckedCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketUncheckedCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketUncheckedCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionUncheckedCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionUncheckedCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutArchivedByInput
+  updatedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutCreatedTicketsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedTicketsInput, Prisma.UserUncheckedCreateWithoutCreatedTicketsInput>
+}
+
+export type UserCreateWithoutUpdatedTicketsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  company: Prisma.CompanyCreateNestedOneWithoutUsersInput
+  approver?: Prisma.UserCreateNestedOneWithoutDelegatesInput
+  delegates?: Prisma.UserCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketCreateNestedManyWithoutCreatedByInput
+  createdInvestigations?: Prisma.InvestigationCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutUpdatedTicketsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  companyId: string
+  approverId?: string | null
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  delegates?: Prisma.UserUncheckedCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketUncheckedCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketUncheckedCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketUncheckedCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionUncheckedCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionUncheckedCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatedByInput
+  createdInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutUpdatedTicketsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedTicketsInput, Prisma.UserUncheckedCreateWithoutUpdatedTicketsInput>
+}
+
+export type UserCreateWithoutArchivedTicketsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  company: Prisma.CompanyCreateNestedOneWithoutUsersInput
+  approver?: Prisma.UserCreateNestedOneWithoutDelegatesInput
+  delegates?: Prisma.UserCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionCreateNestedManyWithoutVerifierInput
+  createdTickets?: Prisma.TicketCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutArchivedTicketsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  companyId: string
+  approverId?: string | null
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  delegates?: Prisma.UserUncheckedCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketUncheckedCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketUncheckedCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketUncheckedCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionUncheckedCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionUncheckedCreateNestedManyWithoutVerifierInput
+  createdTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutArchivedTicketsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutArchivedTicketsInput, Prisma.UserUncheckedCreateWithoutArchivedTicketsInput>
+}
+
+export type UserUpsertWithoutTicketsReportedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTicketsReportedInput, Prisma.UserUncheckedUpdateWithoutTicketsReportedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTicketsReportedInput, Prisma.UserUncheckedCreateWithoutTicketsReportedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTicketsReportedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTicketsReportedInput, Prisma.UserUncheckedUpdateWithoutTicketsReportedInput>
+}
+
+export type UserUpdateWithoutTicketsReportedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  company?: Prisma.CompanyUpdateOneRequiredWithoutUsersNestedInput
+  approver?: Prisma.UserUpdateOneWithoutDelegatesNestedInput
+  delegates?: Prisma.UserUpdateManyWithoutApproverNestedInput
+  ticketsApproved?: Prisma.TicketUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTicketsReportedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
+  approverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  delegates?: Prisma.UserUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsApproved?: Prisma.TicketUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUncheckedUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUncheckedUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUncheckedUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUncheckedUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUpsertWithoutTicketsApprovedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTicketsApprovedInput, Prisma.UserUncheckedUpdateWithoutTicketsApprovedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTicketsApprovedInput, Prisma.UserUncheckedCreateWithoutTicketsApprovedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTicketsApprovedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTicketsApprovedInput, Prisma.UserUncheckedUpdateWithoutTicketsApprovedInput>
+}
+
+export type UserUpdateWithoutTicketsApprovedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  company?: Prisma.CompanyUpdateOneRequiredWithoutUsersNestedInput
+  approver?: Prisma.UserUpdateOneWithoutDelegatesNestedInput
+  delegates?: Prisma.UserUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUpdateManyWithoutReporterNestedInput
+  ticketsInvestigated?: Prisma.TicketUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTicketsApprovedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
+  approverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  delegates?: Prisma.UserUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUncheckedUpdateManyWithoutReporterNestedInput
+  ticketsInvestigated?: Prisma.TicketUncheckedUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUncheckedUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUncheckedUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUncheckedUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUpsertWithoutTicketsInvestigatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTicketsInvestigatedInput, Prisma.UserUncheckedUpdateWithoutTicketsInvestigatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTicketsInvestigatedInput, Prisma.UserUncheckedCreateWithoutTicketsInvestigatedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTicketsInvestigatedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTicketsInvestigatedInput, Prisma.UserUncheckedUpdateWithoutTicketsInvestigatedInput>
+}
+
+export type UserUpdateWithoutTicketsInvestigatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  company?: Prisma.CompanyUpdateOneRequiredWithoutUsersNestedInput
+  approver?: Prisma.UserUpdateOneWithoutDelegatesNestedInput
+  delegates?: Prisma.UserUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUpdateManyWithoutApproverNestedInput
+  investigationsAssigned?: Prisma.InvestigationUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTicketsInvestigatedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
+  approverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  delegates?: Prisma.UserUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUncheckedUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUncheckedUpdateManyWithoutApproverNestedInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUncheckedUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUncheckedUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUncheckedUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUpsertWithoutCreatedTicketsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedTicketsInput, Prisma.UserUncheckedUpdateWithoutCreatedTicketsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedTicketsInput, Prisma.UserUncheckedCreateWithoutCreatedTicketsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedTicketsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedTicketsInput, Prisma.UserUncheckedUpdateWithoutCreatedTicketsInput>
+}
+
+export type UserUpdateWithoutCreatedTicketsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  company?: Prisma.CompanyUpdateOneRequiredWithoutUsersNestedInput
+  approver?: Prisma.UserUpdateOneWithoutDelegatesNestedInput
+  delegates?: Prisma.UserUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUpdateManyWithoutArchivedByNestedInput
+  updatedTickets?: Prisma.TicketUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedTicketsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
+  approverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  delegates?: Prisma.UserUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUncheckedUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUncheckedUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUncheckedUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUncheckedUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUncheckedUpdateManyWithoutArchivedByNestedInput
+  updatedTickets?: Prisma.TicketUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUpsertWithoutUpdatedTicketsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedTicketsInput, Prisma.UserUncheckedUpdateWithoutUpdatedTicketsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedTicketsInput, Prisma.UserUncheckedCreateWithoutUpdatedTicketsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatedTicketsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedTicketsInput, Prisma.UserUncheckedUpdateWithoutUpdatedTicketsInput>
+}
+
+export type UserUpdateWithoutUpdatedTicketsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  company?: Prisma.CompanyUpdateOneRequiredWithoutUsersNestedInput
+  approver?: Prisma.UserUpdateOneWithoutDelegatesNestedInput
+  delegates?: Prisma.UserUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUpdateManyWithoutCreatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatedTicketsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
+  approverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  delegates?: Prisma.UserUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUncheckedUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUncheckedUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUncheckedUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUncheckedUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUncheckedUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUpsertWithoutArchivedTicketsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutArchivedTicketsInput, Prisma.UserUncheckedUpdateWithoutArchivedTicketsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutArchivedTicketsInput, Prisma.UserUncheckedCreateWithoutArchivedTicketsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutArchivedTicketsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutArchivedTicketsInput, Prisma.UserUncheckedUpdateWithoutArchivedTicketsInput>
+}
+
+export type UserUpdateWithoutArchivedTicketsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  company?: Prisma.CompanyUpdateOneRequiredWithoutUsersNestedInput
+  approver?: Prisma.UserUpdateOneWithoutDelegatesNestedInput
+  delegates?: Prisma.UserUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUpdateManyWithoutVerifierNestedInput
+  createdTickets?: Prisma.TicketUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutArchivedTicketsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
+  approverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  delegates?: Prisma.UserUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUncheckedUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUncheckedUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUncheckedUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUncheckedUpdateManyWithoutVerifierNestedInput
+  createdTickets?: Prisma.TicketUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserCreateWithoutInvestigationsAssignedInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  company: Prisma.CompanyCreateNestedOneWithoutUsersInput
+  approver?: Prisma.UserCreateNestedOneWithoutDelegatesInput
+  delegates?: Prisma.UserCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutInvestigationsAssignedInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  companyId: string
+  approverId?: string | null
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  delegates?: Prisma.UserUncheckedCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketUncheckedCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketUncheckedCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketUncheckedCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionUncheckedCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionUncheckedCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutInvestigationsAssignedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutInvestigationsAssignedInput, Prisma.UserUncheckedCreateWithoutInvestigationsAssignedInput>
+}
+
+export type UserCreateWithoutCreatedInvestigationsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  company: Prisma.CompanyCreateNestedOneWithoutUsersInput
+  approver?: Prisma.UserCreateNestedOneWithoutDelegatesInput
+  delegates?: Prisma.UserCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketCreateNestedManyWithoutUpdatedByInput
+  updatedInvestigations?: Prisma.InvestigationCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutCreatedInvestigationsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  companyId: string
+  approverId?: string | null
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  delegates?: Prisma.UserUncheckedCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketUncheckedCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketUncheckedCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketUncheckedCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionUncheckedCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionUncheckedCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutUpdatedByInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutCreatedInvestigationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedInvestigationsInput, Prisma.UserUncheckedCreateWithoutCreatedInvestigationsInput>
+}
+
+export type UserCreateWithoutUpdatedInvestigationsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  company: Prisma.CompanyCreateNestedOneWithoutUsersInput
+  approver?: Prisma.UserCreateNestedOneWithoutDelegatesInput
+  delegates?: Prisma.UserCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationCreateNestedManyWithoutCreatedByInput
+  createdActions?: Prisma.ActionCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutUpdatedInvestigationsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  companyId: string
+  approverId?: string | null
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  delegates?: Prisma.UserUncheckedCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketUncheckedCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketUncheckedCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketUncheckedCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionUncheckedCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionUncheckedCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutCreatedByInput
+  createdActions?: Prisma.ActionUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutUpdatedInvestigationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedInvestigationsInput, Prisma.UserUncheckedCreateWithoutUpdatedInvestigationsInput>
+}
+
+export type UserUpsertWithoutInvestigationsAssignedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutInvestigationsAssignedInput, Prisma.UserUncheckedUpdateWithoutInvestigationsAssignedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutInvestigationsAssignedInput, Prisma.UserUncheckedCreateWithoutInvestigationsAssignedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutInvestigationsAssignedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutInvestigationsAssignedInput, Prisma.UserUncheckedUpdateWithoutInvestigationsAssignedInput>
+}
+
+export type UserUpdateWithoutInvestigationsAssignedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  company?: Prisma.CompanyUpdateOneRequiredWithoutUsersNestedInput
+  approver?: Prisma.UserUpdateOneWithoutDelegatesNestedInput
+  delegates?: Prisma.UserUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutInvestigationsAssignedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
+  approverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  delegates?: Prisma.UserUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUncheckedUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUncheckedUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUncheckedUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUncheckedUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUncheckedUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUpsertWithoutCreatedInvestigationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedInvestigationsInput, Prisma.UserUncheckedUpdateWithoutCreatedInvestigationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedInvestigationsInput, Prisma.UserUncheckedCreateWithoutCreatedInvestigationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedInvestigationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedInvestigationsInput, Prisma.UserUncheckedUpdateWithoutCreatedInvestigationsInput>
+}
+
+export type UserUpdateWithoutCreatedInvestigationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  company?: Prisma.CompanyUpdateOneRequiredWithoutUsersNestedInput
+  approver?: Prisma.UserUpdateOneWithoutDelegatesNestedInput
+  delegates?: Prisma.UserUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUpdateManyWithoutUpdatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedInvestigationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
+  approverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  delegates?: Prisma.UserUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUncheckedUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUncheckedUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUncheckedUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUncheckedUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUncheckedUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUncheckedUpdateManyWithoutUpdatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUpsertWithoutUpdatedInvestigationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedInvestigationsInput, Prisma.UserUncheckedUpdateWithoutUpdatedInvestigationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedInvestigationsInput, Prisma.UserUncheckedCreateWithoutUpdatedInvestigationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatedInvestigationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedInvestigationsInput, Prisma.UserUncheckedUpdateWithoutUpdatedInvestigationsInput>
+}
+
+export type UserUpdateWithoutUpdatedInvestigationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  company?: Prisma.CompanyUpdateOneRequiredWithoutUsersNestedInput
+  approver?: Prisma.UserUpdateOneWithoutDelegatesNestedInput
+  delegates?: Prisma.UserUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUpdateManyWithoutCreatedByNestedInput
+  createdActions?: Prisma.ActionUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatedInvestigationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
+  approverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  delegates?: Prisma.UserUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUncheckedUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUncheckedUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUncheckedUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUncheckedUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUncheckedUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdActions?: Prisma.ActionUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserCreateWithoutActionsOwnedInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  company: Prisma.CompanyCreateNestedOneWithoutUsersInput
+  approver?: Prisma.UserCreateNestedOneWithoutDelegatesInput
+  delegates?: Prisma.UserCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationCreateNestedManyWithoutInvestigatorInput
+  actionsVerified?: Prisma.ActionCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutActionsOwnedInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  companyId: string
+  approverId?: string | null
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  delegates?: Prisma.UserUncheckedCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketUncheckedCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketUncheckedCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketUncheckedCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedCreateNestedManyWithoutInvestigatorInput
+  actionsVerified?: Prisma.ActionUncheckedCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutActionsOwnedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutActionsOwnedInput, Prisma.UserUncheckedCreateWithoutActionsOwnedInput>
+}
+
+export type UserCreateWithoutActionsVerifiedInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  company: Prisma.CompanyCreateNestedOneWithoutUsersInput
+  approver?: Prisma.UserCreateNestedOneWithoutDelegatesInput
+  delegates?: Prisma.UserCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionCreateNestedManyWithoutOwnerInput
+  archivedTickets?: Prisma.TicketCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutActionsVerifiedInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  companyId: string
+  approverId?: string | null
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  delegates?: Prisma.UserUncheckedCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketUncheckedCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketUncheckedCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketUncheckedCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionUncheckedCreateNestedManyWithoutOwnerInput
+  archivedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedActions?: Prisma.ActionUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutActionsVerifiedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutActionsVerifiedInput, Prisma.UserUncheckedCreateWithoutActionsVerifiedInput>
+}
+
+export type UserCreateWithoutCreatedActionsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  company: Prisma.CompanyCreateNestedOneWithoutUsersInput
+  approver?: Prisma.UserCreateNestedOneWithoutDelegatesInput
+  delegates?: Prisma.UserCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationCreateNestedManyWithoutUpdatedByInput
+  updatedActions?: Prisma.ActionCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserUncheckedCreateWithoutCreatedActionsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  companyId: string
+  approverId?: string | null
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  delegates?: Prisma.UserUncheckedCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketUncheckedCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketUncheckedCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketUncheckedCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionUncheckedCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionUncheckedCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutUpdatedByInput
+  updatedActions?: Prisma.ActionUncheckedCreateNestedManyWithoutUpdatedByInput
+}
+
+export type UserCreateOrConnectWithoutCreatedActionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedActionsInput, Prisma.UserUncheckedCreateWithoutCreatedActionsInput>
+}
+
+export type UserCreateWithoutUpdatedActionsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  company: Prisma.CompanyCreateNestedOneWithoutUsersInput
+  approver?: Prisma.UserCreateNestedOneWithoutDelegatesInput
+  delegates?: Prisma.UserCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserUncheckedCreateWithoutUpdatedActionsInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  companyId: string
+  approverId?: string | null
+  role?: $Enums.Role
+  createdAt?: Date | string
+  isActive?: boolean
+  delegates?: Prisma.UserUncheckedCreateNestedManyWithoutApproverInput
+  ticketsReported?: Prisma.TicketUncheckedCreateNestedManyWithoutReporterInput
+  ticketsApproved?: Prisma.TicketUncheckedCreateNestedManyWithoutApproverInput
+  ticketsInvestigated?: Prisma.TicketUncheckedCreateNestedManyWithoutInvestigatorInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedCreateNestedManyWithoutInvestigatorInput
+  actionsOwned?: Prisma.ActionUncheckedCreateNestedManyWithoutOwnerInput
+  actionsVerified?: Prisma.ActionUncheckedCreateNestedManyWithoutVerifierInput
+  archivedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutArchivedByInput
+  createdTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedTickets?: Prisma.TicketUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdActions?: Prisma.ActionUncheckedCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserCreateOrConnectWithoutUpdatedActionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedActionsInput, Prisma.UserUncheckedCreateWithoutUpdatedActionsInput>
+}
+
+export type UserUpsertWithoutActionsOwnedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutActionsOwnedInput, Prisma.UserUncheckedUpdateWithoutActionsOwnedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutActionsOwnedInput, Prisma.UserUncheckedCreateWithoutActionsOwnedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutActionsOwnedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutActionsOwnedInput, Prisma.UserUncheckedUpdateWithoutActionsOwnedInput>
+}
+
+export type UserUpdateWithoutActionsOwnedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  company?: Prisma.CompanyUpdateOneRequiredWithoutUsersNestedInput
+  approver?: Prisma.UserUpdateOneWithoutDelegatesNestedInput
+  delegates?: Prisma.UserUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUpdateManyWithoutInvestigatorNestedInput
+  actionsVerified?: Prisma.ActionUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutActionsOwnedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
+  approverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  delegates?: Prisma.UserUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUncheckedUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUncheckedUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedUpdateManyWithoutInvestigatorNestedInput
+  actionsVerified?: Prisma.ActionUncheckedUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUncheckedUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUpsertWithoutActionsVerifiedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutActionsVerifiedInput, Prisma.UserUncheckedUpdateWithoutActionsVerifiedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutActionsVerifiedInput, Prisma.UserUncheckedCreateWithoutActionsVerifiedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutActionsVerifiedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutActionsVerifiedInput, Prisma.UserUncheckedUpdateWithoutActionsVerifiedInput>
+}
+
+export type UserUpdateWithoutActionsVerifiedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  company?: Prisma.CompanyUpdateOneRequiredWithoutUsersNestedInput
+  approver?: Prisma.UserUpdateOneWithoutDelegatesNestedInput
+  delegates?: Prisma.UserUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUpdateManyWithoutOwnerNestedInput
+  archivedTickets?: Prisma.TicketUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutActionsVerifiedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
+  approverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  delegates?: Prisma.UserUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUncheckedUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUncheckedUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUncheckedUpdateManyWithoutOwnerNestedInput
+  archivedTickets?: Prisma.TicketUncheckedUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUpsertWithoutCreatedActionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedActionsInput, Prisma.UserUncheckedUpdateWithoutCreatedActionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedActionsInput, Prisma.UserUncheckedCreateWithoutCreatedActionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedActionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedActionsInput, Prisma.UserUncheckedUpdateWithoutCreatedActionsInput>
+}
+
+export type UserUpdateWithoutCreatedActionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  company?: Prisma.CompanyUpdateOneRequiredWithoutUsersNestedInput
+  approver?: Prisma.UserUpdateOneWithoutDelegatesNestedInput
+  delegates?: Prisma.UserUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUpdateManyWithoutUpdatedByNestedInput
+  updatedActions?: Prisma.ActionUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedActionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
+  approverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  delegates?: Prisma.UserUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUncheckedUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUncheckedUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUncheckedUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUncheckedUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUncheckedUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutUpdatedByNestedInput
+  updatedActions?: Prisma.ActionUncheckedUpdateManyWithoutUpdatedByNestedInput
+}
+
+export type UserUpsertWithoutUpdatedActionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedActionsInput, Prisma.UserUncheckedUpdateWithoutUpdatedActionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUpdatedActionsInput, Prisma.UserUncheckedCreateWithoutUpdatedActionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUpdatedActionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUpdatedActionsInput, Prisma.UserUncheckedUpdateWithoutUpdatedActionsInput>
+}
+
+export type UserUpdateWithoutUpdatedActionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  company?: Prisma.CompanyUpdateOneRequiredWithoutUsersNestedInput
+  approver?: Prisma.UserUpdateOneWithoutDelegatesNestedInput
+  delegates?: Prisma.UserUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUpdatedActionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  companyId?: Prisma.StringFieldUpdateOperationsInput | string
+  approverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  delegates?: Prisma.UserUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUncheckedUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUncheckedUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUncheckedUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUncheckedUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUncheckedUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUncheckedUpdateManyWithoutCreatedByNestedInput
+}
+
 export type UserCreateManyApproverInput = {
   id?: string
   name: string
@@ -739,6 +2639,19 @@ export type UserUpdateWithoutApproverInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   company?: Prisma.CompanyUpdateOneRequiredWithoutUsersNestedInput
   delegates?: Prisma.UserUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutApproverInput = {
@@ -751,6 +2664,19 @@ export type UserUncheckedUpdateWithoutApproverInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   delegates?: Prisma.UserUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUncheckedUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUncheckedUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUncheckedUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUncheckedUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUncheckedUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutApproverInput = {
@@ -785,6 +2711,19 @@ export type UserUpdateWithoutCompanyInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approver?: Prisma.UserUpdateOneWithoutDelegatesNestedInput
   delegates?: Prisma.UserUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCompanyInput = {
@@ -797,6 +2736,19 @@ export type UserUncheckedUpdateWithoutCompanyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   delegates?: Prisma.UserUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsReported?: Prisma.TicketUncheckedUpdateManyWithoutReporterNestedInput
+  ticketsApproved?: Prisma.TicketUncheckedUpdateManyWithoutApproverNestedInput
+  ticketsInvestigated?: Prisma.TicketUncheckedUpdateManyWithoutInvestigatorNestedInput
+  investigationsAssigned?: Prisma.InvestigationUncheckedUpdateManyWithoutInvestigatorNestedInput
+  actionsOwned?: Prisma.ActionUncheckedUpdateManyWithoutOwnerNestedInput
+  actionsVerified?: Prisma.ActionUncheckedUpdateManyWithoutVerifierNestedInput
+  archivedTickets?: Prisma.TicketUncheckedUpdateManyWithoutArchivedByNestedInput
+  createdTickets?: Prisma.TicketUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedTickets?: Prisma.TicketUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedInvestigations?: Prisma.InvestigationUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdActions?: Prisma.ActionUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedActions?: Prisma.ActionUncheckedUpdateManyWithoutUpdatedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutCompanyInput = {
@@ -817,10 +2769,36 @@ export type UserUncheckedUpdateManyWithoutCompanyInput = {
 
 export type UserCountOutputType = {
   delegates: number
+  ticketsReported: number
+  ticketsApproved: number
+  ticketsInvestigated: number
+  investigationsAssigned: number
+  actionsOwned: number
+  actionsVerified: number
+  archivedTickets: number
+  createdTickets: number
+  updatedTickets: number
+  createdInvestigations: number
+  updatedInvestigations: number
+  createdActions: number
+  updatedActions: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   delegates?: boolean | UserCountOutputTypeCountDelegatesArgs
+  ticketsReported?: boolean | UserCountOutputTypeCountTicketsReportedArgs
+  ticketsApproved?: boolean | UserCountOutputTypeCountTicketsApprovedArgs
+  ticketsInvestigated?: boolean | UserCountOutputTypeCountTicketsInvestigatedArgs
+  investigationsAssigned?: boolean | UserCountOutputTypeCountInvestigationsAssignedArgs
+  actionsOwned?: boolean | UserCountOutputTypeCountActionsOwnedArgs
+  actionsVerified?: boolean | UserCountOutputTypeCountActionsVerifiedArgs
+  archivedTickets?: boolean | UserCountOutputTypeCountArchivedTicketsArgs
+  createdTickets?: boolean | UserCountOutputTypeCountCreatedTicketsArgs
+  updatedTickets?: boolean | UserCountOutputTypeCountUpdatedTicketsArgs
+  createdInvestigations?: boolean | UserCountOutputTypeCountCreatedInvestigationsArgs
+  updatedInvestigations?: boolean | UserCountOutputTypeCountUpdatedInvestigationsArgs
+  createdActions?: boolean | UserCountOutputTypeCountCreatedActionsArgs
+  updatedActions?: boolean | UserCountOutputTypeCountUpdatedActionsArgs
 }
 
 /**
@@ -840,6 +2818,97 @@ export type UserCountOutputTypeCountDelegatesArgs<ExtArgs extends runtime.Types.
   where?: Prisma.UserWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTicketsReportedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TicketWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTicketsApprovedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TicketWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTicketsInvestigatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TicketWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountInvestigationsAssignedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InvestigationWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountActionsOwnedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ActionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountActionsVerifiedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ActionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountArchivedTicketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TicketWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedTicketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TicketWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedTicketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TicketWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedInvestigationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InvestigationWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedInvestigationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InvestigationWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedActionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ActionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUpdatedActionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ActionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -854,6 +2923,19 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
   approver?: boolean | Prisma.User$approverArgs<ExtArgs>
   delegates?: boolean | Prisma.User$delegatesArgs<ExtArgs>
+  ticketsReported?: boolean | Prisma.User$ticketsReportedArgs<ExtArgs>
+  ticketsApproved?: boolean | Prisma.User$ticketsApprovedArgs<ExtArgs>
+  ticketsInvestigated?: boolean | Prisma.User$ticketsInvestigatedArgs<ExtArgs>
+  investigationsAssigned?: boolean | Prisma.User$investigationsAssignedArgs<ExtArgs>
+  actionsOwned?: boolean | Prisma.User$actionsOwnedArgs<ExtArgs>
+  actionsVerified?: boolean | Prisma.User$actionsVerifiedArgs<ExtArgs>
+  archivedTickets?: boolean | Prisma.User$archivedTicketsArgs<ExtArgs>
+  createdTickets?: boolean | Prisma.User$createdTicketsArgs<ExtArgs>
+  updatedTickets?: boolean | Prisma.User$updatedTicketsArgs<ExtArgs>
+  createdInvestigations?: boolean | Prisma.User$createdInvestigationsArgs<ExtArgs>
+  updatedInvestigations?: boolean | Prisma.User$updatedInvestigationsArgs<ExtArgs>
+  createdActions?: boolean | Prisma.User$createdActionsArgs<ExtArgs>
+  updatedActions?: boolean | Prisma.User$updatedActionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -902,6 +2984,19 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
   approver?: boolean | Prisma.User$approverArgs<ExtArgs>
   delegates?: boolean | Prisma.User$delegatesArgs<ExtArgs>
+  ticketsReported?: boolean | Prisma.User$ticketsReportedArgs<ExtArgs>
+  ticketsApproved?: boolean | Prisma.User$ticketsApprovedArgs<ExtArgs>
+  ticketsInvestigated?: boolean | Prisma.User$ticketsInvestigatedArgs<ExtArgs>
+  investigationsAssigned?: boolean | Prisma.User$investigationsAssignedArgs<ExtArgs>
+  actionsOwned?: boolean | Prisma.User$actionsOwnedArgs<ExtArgs>
+  actionsVerified?: boolean | Prisma.User$actionsVerifiedArgs<ExtArgs>
+  archivedTickets?: boolean | Prisma.User$archivedTicketsArgs<ExtArgs>
+  createdTickets?: boolean | Prisma.User$createdTicketsArgs<ExtArgs>
+  updatedTickets?: boolean | Prisma.User$updatedTicketsArgs<ExtArgs>
+  createdInvestigations?: boolean | Prisma.User$createdInvestigationsArgs<ExtArgs>
+  updatedInvestigations?: boolean | Prisma.User$updatedInvestigationsArgs<ExtArgs>
+  createdActions?: boolean | Prisma.User$createdActionsArgs<ExtArgs>
+  updatedActions?: boolean | Prisma.User$updatedActionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -919,6 +3014,19 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     company: Prisma.$CompanyPayload<ExtArgs>
     approver: Prisma.$UserPayload<ExtArgs> | null
     delegates: Prisma.$UserPayload<ExtArgs>[]
+    ticketsReported: Prisma.$TicketPayload<ExtArgs>[]
+    ticketsApproved: Prisma.$TicketPayload<ExtArgs>[]
+    ticketsInvestigated: Prisma.$TicketPayload<ExtArgs>[]
+    investigationsAssigned: Prisma.$InvestigationPayload<ExtArgs>[]
+    actionsOwned: Prisma.$ActionPayload<ExtArgs>[]
+    actionsVerified: Prisma.$ActionPayload<ExtArgs>[]
+    archivedTickets: Prisma.$TicketPayload<ExtArgs>[]
+    createdTickets: Prisma.$TicketPayload<ExtArgs>[]
+    updatedTickets: Prisma.$TicketPayload<ExtArgs>[]
+    createdInvestigations: Prisma.$InvestigationPayload<ExtArgs>[]
+    updatedInvestigations: Prisma.$InvestigationPayload<ExtArgs>[]
+    createdActions: Prisma.$ActionPayload<ExtArgs>[]
+    updatedActions: Prisma.$ActionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1327,6 +3435,19 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   company<T extends Prisma.CompanyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyDefaultArgs<ExtArgs>>): Prisma.Prisma__CompanyClient<runtime.Types.Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   approver<T extends Prisma.User$approverArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$approverArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   delegates<T extends Prisma.User$delegatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$delegatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ticketsReported<T extends Prisma.User$ticketsReportedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ticketsReportedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ticketsApproved<T extends Prisma.User$ticketsApprovedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ticketsApprovedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ticketsInvestigated<T extends Prisma.User$ticketsInvestigatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ticketsInvestigatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  investigationsAssigned<T extends Prisma.User$investigationsAssignedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$investigationsAssignedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvestigationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  actionsOwned<T extends Prisma.User$actionsOwnedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$actionsOwnedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  actionsVerified<T extends Prisma.User$actionsVerifiedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$actionsVerifiedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  archivedTickets<T extends Prisma.User$archivedTicketsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$archivedTicketsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdTickets<T extends Prisma.User$createdTicketsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdTicketsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedTickets<T extends Prisma.User$updatedTicketsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedTicketsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdInvestigations<T extends Prisma.User$createdInvestigationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdInvestigationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvestigationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedInvestigations<T extends Prisma.User$updatedInvestigationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedInvestigationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvestigationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdActions<T extends Prisma.User$createdActionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdActionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  updatedActions<T extends Prisma.User$updatedActionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$updatedActionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1806,6 +3927,318 @@ export type User$delegatesArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
+}
+
+/**
+ * User.ticketsReported
+ */
+export type User$ticketsReportedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Ticket
+   */
+  select?: Prisma.TicketSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Ticket
+   */
+  omit?: Prisma.TicketOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TicketInclude<ExtArgs> | null
+  where?: Prisma.TicketWhereInput
+  orderBy?: Prisma.TicketOrderByWithRelationInput | Prisma.TicketOrderByWithRelationInput[]
+  cursor?: Prisma.TicketWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TicketScalarFieldEnum | Prisma.TicketScalarFieldEnum[]
+}
+
+/**
+ * User.ticketsApproved
+ */
+export type User$ticketsApprovedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Ticket
+   */
+  select?: Prisma.TicketSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Ticket
+   */
+  omit?: Prisma.TicketOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TicketInclude<ExtArgs> | null
+  where?: Prisma.TicketWhereInput
+  orderBy?: Prisma.TicketOrderByWithRelationInput | Prisma.TicketOrderByWithRelationInput[]
+  cursor?: Prisma.TicketWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TicketScalarFieldEnum | Prisma.TicketScalarFieldEnum[]
+}
+
+/**
+ * User.ticketsInvestigated
+ */
+export type User$ticketsInvestigatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Ticket
+   */
+  select?: Prisma.TicketSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Ticket
+   */
+  omit?: Prisma.TicketOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TicketInclude<ExtArgs> | null
+  where?: Prisma.TicketWhereInput
+  orderBy?: Prisma.TicketOrderByWithRelationInput | Prisma.TicketOrderByWithRelationInput[]
+  cursor?: Prisma.TicketWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TicketScalarFieldEnum | Prisma.TicketScalarFieldEnum[]
+}
+
+/**
+ * User.investigationsAssigned
+ */
+export type User$investigationsAssignedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Investigation
+   */
+  select?: Prisma.InvestigationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Investigation
+   */
+  omit?: Prisma.InvestigationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InvestigationInclude<ExtArgs> | null
+  where?: Prisma.InvestigationWhereInput
+  orderBy?: Prisma.InvestigationOrderByWithRelationInput | Prisma.InvestigationOrderByWithRelationInput[]
+  cursor?: Prisma.InvestigationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InvestigationScalarFieldEnum | Prisma.InvestigationScalarFieldEnum[]
+}
+
+/**
+ * User.actionsOwned
+ */
+export type User$actionsOwnedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Action
+   */
+  select?: Prisma.ActionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Action
+   */
+  omit?: Prisma.ActionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ActionInclude<ExtArgs> | null
+  where?: Prisma.ActionWhereInput
+  orderBy?: Prisma.ActionOrderByWithRelationInput | Prisma.ActionOrderByWithRelationInput[]
+  cursor?: Prisma.ActionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ActionScalarFieldEnum | Prisma.ActionScalarFieldEnum[]
+}
+
+/**
+ * User.actionsVerified
+ */
+export type User$actionsVerifiedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Action
+   */
+  select?: Prisma.ActionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Action
+   */
+  omit?: Prisma.ActionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ActionInclude<ExtArgs> | null
+  where?: Prisma.ActionWhereInput
+  orderBy?: Prisma.ActionOrderByWithRelationInput | Prisma.ActionOrderByWithRelationInput[]
+  cursor?: Prisma.ActionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ActionScalarFieldEnum | Prisma.ActionScalarFieldEnum[]
+}
+
+/**
+ * User.archivedTickets
+ */
+export type User$archivedTicketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Ticket
+   */
+  select?: Prisma.TicketSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Ticket
+   */
+  omit?: Prisma.TicketOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TicketInclude<ExtArgs> | null
+  where?: Prisma.TicketWhereInput
+  orderBy?: Prisma.TicketOrderByWithRelationInput | Prisma.TicketOrderByWithRelationInput[]
+  cursor?: Prisma.TicketWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TicketScalarFieldEnum | Prisma.TicketScalarFieldEnum[]
+}
+
+/**
+ * User.createdTickets
+ */
+export type User$createdTicketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Ticket
+   */
+  select?: Prisma.TicketSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Ticket
+   */
+  omit?: Prisma.TicketOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TicketInclude<ExtArgs> | null
+  where?: Prisma.TicketWhereInput
+  orderBy?: Prisma.TicketOrderByWithRelationInput | Prisma.TicketOrderByWithRelationInput[]
+  cursor?: Prisma.TicketWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TicketScalarFieldEnum | Prisma.TicketScalarFieldEnum[]
+}
+
+/**
+ * User.updatedTickets
+ */
+export type User$updatedTicketsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Ticket
+   */
+  select?: Prisma.TicketSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Ticket
+   */
+  omit?: Prisma.TicketOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TicketInclude<ExtArgs> | null
+  where?: Prisma.TicketWhereInput
+  orderBy?: Prisma.TicketOrderByWithRelationInput | Prisma.TicketOrderByWithRelationInput[]
+  cursor?: Prisma.TicketWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TicketScalarFieldEnum | Prisma.TicketScalarFieldEnum[]
+}
+
+/**
+ * User.createdInvestigations
+ */
+export type User$createdInvestigationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Investigation
+   */
+  select?: Prisma.InvestigationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Investigation
+   */
+  omit?: Prisma.InvestigationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InvestigationInclude<ExtArgs> | null
+  where?: Prisma.InvestigationWhereInput
+  orderBy?: Prisma.InvestigationOrderByWithRelationInput | Prisma.InvestigationOrderByWithRelationInput[]
+  cursor?: Prisma.InvestigationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InvestigationScalarFieldEnum | Prisma.InvestigationScalarFieldEnum[]
+}
+
+/**
+ * User.updatedInvestigations
+ */
+export type User$updatedInvestigationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Investigation
+   */
+  select?: Prisma.InvestigationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Investigation
+   */
+  omit?: Prisma.InvestigationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InvestigationInclude<ExtArgs> | null
+  where?: Prisma.InvestigationWhereInput
+  orderBy?: Prisma.InvestigationOrderByWithRelationInput | Prisma.InvestigationOrderByWithRelationInput[]
+  cursor?: Prisma.InvestigationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InvestigationScalarFieldEnum | Prisma.InvestigationScalarFieldEnum[]
+}
+
+/**
+ * User.createdActions
+ */
+export type User$createdActionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Action
+   */
+  select?: Prisma.ActionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Action
+   */
+  omit?: Prisma.ActionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ActionInclude<ExtArgs> | null
+  where?: Prisma.ActionWhereInput
+  orderBy?: Prisma.ActionOrderByWithRelationInput | Prisma.ActionOrderByWithRelationInput[]
+  cursor?: Prisma.ActionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ActionScalarFieldEnum | Prisma.ActionScalarFieldEnum[]
+}
+
+/**
+ * User.updatedActions
+ */
+export type User$updatedActionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Action
+   */
+  select?: Prisma.ActionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Action
+   */
+  omit?: Prisma.ActionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ActionInclude<ExtArgs> | null
+  where?: Prisma.ActionWhereInput
+  orderBy?: Prisma.ActionOrderByWithRelationInput | Prisma.ActionOrderByWithRelationInput[]
+  cursor?: Prisma.ActionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ActionScalarFieldEnum | Prisma.ActionScalarFieldEnum[]
 }
 
 /**

@@ -52,7 +52,13 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  Company: 'Company'
+  Company: 'Company',
+  Ticket: 'Ticket',
+  Investigation: 'Investigation',
+  Action: 'Action',
+  InboxTicket: 'InboxTicket',
+  InboxInvestigation: 'InboxInvestigation',
+  InboxAction: 'InboxAction'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -94,6 +100,106 @@ export const CompanyScalarFieldEnum = {
 } as const
 
 export type CompanyScalarFieldEnum = (typeof CompanyScalarFieldEnum)[keyof typeof CompanyScalarFieldEnum]
+
+
+export const TicketScalarFieldEnum = {
+  id: 'id',
+  companyId: 'companyId',
+  title: 'title',
+  description: 'description',
+  observationType: 'observationType',
+  category: 'category',
+  severity: 'severity',
+  status: 'status',
+  reporterId: 'reporterId',
+  approverId: 'approverId',
+  investigatorId: 'investigatorId',
+  createdById: 'createdById',
+  updatedById: 'updatedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  archivedAt: 'archivedAt',
+  archivedById: 'archivedById'
+} as const
+
+export type TicketScalarFieldEnum = (typeof TicketScalarFieldEnum)[keyof typeof TicketScalarFieldEnum]
+
+
+export const InvestigationScalarFieldEnum = {
+  id: 'id',
+  companyId: 'companyId',
+  ticketId: 'ticketId',
+  investigatorId: 'investigatorId',
+  summary: 'summary',
+  findings: 'findings',
+  rcaMethod: 'rcaMethod',
+  status: 'status',
+  createdById: 'createdById',
+  updatedById: 'updatedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  archivedAt: 'archivedAt'
+} as const
+
+export type InvestigationScalarFieldEnum = (typeof InvestigationScalarFieldEnum)[keyof typeof InvestigationScalarFieldEnum]
+
+
+export const ActionScalarFieldEnum = {
+  id: 'id',
+  companyId: 'companyId',
+  investigationId: 'investigationId',
+  title: 'title',
+  description: 'description',
+  dueDate: 'dueDate',
+  acceptanceCriteria: 'acceptanceCriteria',
+  ownerId: 'ownerId',
+  verifierId: 'verifierId',
+  status: 'status',
+  verifiedAt: 'verifiedAt',
+  createdById: 'createdById',
+  updatedById: 'updatedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  archivedAt: 'archivedAt'
+} as const
+
+export type ActionScalarFieldEnum = (typeof ActionScalarFieldEnum)[keyof typeof ActionScalarFieldEnum]
+
+
+export const InboxTicketScalarFieldEnum = {
+  id: 'id',
+  ticketId: 'ticketId',
+  isNew: 'isNew',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InboxTicketScalarFieldEnum = (typeof InboxTicketScalarFieldEnum)[keyof typeof InboxTicketScalarFieldEnum]
+
+
+export const InboxInvestigationScalarFieldEnum = {
+  id: 'id',
+  investigationId: 'investigationId',
+  isNew: 'isNew',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InboxInvestigationScalarFieldEnum = (typeof InboxInvestigationScalarFieldEnum)[keyof typeof InboxInvestigationScalarFieldEnum]
+
+
+export const InboxActionScalarFieldEnum = {
+  id: 'id',
+  actionId: 'actionId',
+  isNew: 'isNew',
+  archivedAt: 'archivedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InboxActionScalarFieldEnum = (typeof InboxActionScalarFieldEnum)[keyof typeof InboxActionScalarFieldEnum]
 
 
 export const SortOrder = {

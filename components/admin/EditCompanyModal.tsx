@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import {
     Dialog,
     DialogContent,
+    DialogDescription,
     DialogFooter,
     DialogHeader,
     DialogTitle,
@@ -75,13 +76,17 @@ export default function EditCompanyModal({ company }: Props) {
                 >
                     Edit Company
                 </Button>
-
             </DialogTrigger>
 
             <DialogContent className="sm:max-w-lg">
                 <DialogHeader>
                     <DialogTitle>Edit company</DialogTitle>
                 </DialogHeader>
+
+                {/* Accessibility: DialogDescription must be a direct child of DialogContent */}
+                <DialogDescription className="mb-2 text-sm text-muted-foreground">
+                    Edit company details.
+                </DialogDescription>
 
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}

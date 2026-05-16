@@ -46,13 +46,8 @@ export default function ToggleSwitch({
       setChecked(prev);
       onOptimisticChange?.(prev);
 
-      // Show a helpful message (wrapper may also show its own toast)
       const message = err?.message ?? "Unable to update status";
       toast.error(message);
-
-      // DO NOT rethrow here — swallowing prevents unhandledRejection in the browser
-      // If you want the wrapper to also react, it can return a value or set state instead.
-      console.debug("ToggleSwitch handled error:", message);
     } finally {
       // Always clear loading so the switch remains interactive
       setLoading(false);
