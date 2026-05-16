@@ -12,6 +12,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CheckCircle, Clipboard, FileText, Inbox, Search, Users } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { CreateTicketModal } from "./CreateTicketModal";
 
 type ItemType = "ticket" | "investigation" | "action" | "verification";
 
@@ -156,8 +157,7 @@ export default function Workspace() {
                 <Search className="h-4 w-4" />
               </Button>
             </div>
-
-            <Button asChild size="lg" className="h-10"><Link href="/create/ticket">New Ticket</Link></Button>
+              <CreateTicketModal />
           </div>
 
           {/* Mobile search input (collapsible) */}
